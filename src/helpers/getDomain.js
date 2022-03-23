@@ -7,7 +7,7 @@ import { isProduction } from 'helpers/isProduction';
  * @returns {string}
  */
 export const getDomain = () => {
-  const prodUrl = 'https://sopra-fs22-group-03-server.herokuapp.com'; // DONE: changed URL to group Heroku app
+  const prodUrl = 'https://sopra-fs22-group-03-server.herokuapp.com'; // DONE: changed the URL to group Heroku app
   const devUrl = 'http://localhost:8080';
 
   return isProduction() ? prodUrl : devUrl;
