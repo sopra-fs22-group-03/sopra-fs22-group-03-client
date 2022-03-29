@@ -1,6 +1,6 @@
 @import "styles/theme";
 
-.login {
+.edit {
   &.container {
     margin-top: 2em;
     min-height: 300px;
@@ -42,7 +42,6 @@
   &.label {
     color: $textColor;
     margin-bottom: 10px;
-    text-transform: lowercase;
     font-weight: 300;
   }
   &.button-container {

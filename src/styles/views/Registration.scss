@@ -1,6 +1,6 @@
 @import "styles/theme";
 
-.login {
+.registration {
   &.container {
     margin-top: 2em;
     min-height: 300px;
@@ -50,7 +50,7 @@
     justify-content: center;
     margin-top: 2em;
   }
-  &.registration-switch {
+  &.login-switch {
     color: $textColor;
     margin-top: 10px;
     margin-bottom: 1px;
@@ -59,7 +59,7 @@
     font-size: 13pt;
     text-align: center;
   }
-  &.registration-switch-link {
+  &.login-switch-link {
     color: green;
     font-weight: bold;
     font-style: italic;

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {api, handleError} from 'helpers/api';
 import User from 'models/User';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
-import 'styles/views/Login.scss';
+import 'styles/views/ProfileEditor.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
@@ -15,12 +15,12 @@ specific components that belong to the main one in the same file.
  */
 const FormField = props => {
   return (
-    <div className="login field">
-      <label className="login label">
+    <div className="edit field">
+      <label className="edit label">
         {props.label}
       </label>
       <input
-        className="login input"
+        className="edit input"
         placeholder="enter here.."
         value={props.value}
         type = {props.type}
@@ -36,62 +36,50 @@ FormField.propTypes = {
   onChange: PropTypes.func
 };
 
-const Login = props => {
+const ProfileEditor = props => {
   const history = useHistory();
-  const [password, setName] = useState(null);
+  const [birthday, setBirthday] = useState(null);
   const [username, setUsername] = useState(null);
 
-  const doLogin = async () => {
+  let {userId} = useParams();
+
+  const doEdit = async () => {
     try {
-      const requestBody = JSON.stringify({username, password});
-      const response = await api.post('/login', requestBody);
+      const requestBody = JSON.stringify({username, birthday});
+      const response = await api.put(`/users/${userId}`, requestBody);
 
-      // Get the returned user and update a new object.
-      const user = new User(response.data);
-
-      // Store the token into the local storage.
-      localStorage.setItem('token', user.token);
-
-      // Store the ID of the currently logged-in user in localstorage
-      localStorage.setItem('currentUser', user.id);
-
-      // Login successfully worked --> navigate to the route /game in the GameRouter
-      history.push(`/game`);
+      // Edit successfully worked --> navigate back to user page
+      history.goBack();
     } catch (error) {
-      alert(`Something went wrong during the login: \n${handleError(error)}`);
+      alert(`Something went wrong during the edit: \n${handleError(error)}`);
     }
   };
 
   return (
     <BaseContainer>
-      <div className="login container">
-        <div className="login form">
+      <div className="edit container">
+        <div className="edit form">
           <FormField
             type = "text"
-            label="Username"
+            label="New Username"
             value={username}
             onChange={un => setUsername(un)}
           />
           <FormField
-            type = "password"
-            label="Password"
-            value={password}
-            onChange={n => setName(n)}
+            type = "text"
+            label="New Birthday (yyyy-mm-dd)"
+            value={birthday}
+            onChange={n => setBirthday(n)}
           />
-          <div className="login button-container">
+          <div className="edit button-container">
             <Button
-              disabled={!username || !password}
+              //disabled={!username || !password}
               width="100%"
-              onClick={() => doLogin()}
+              onClick={() => doEdit()}
             >
-              Login
+              Save
             </Button>
           </div>
-          <div className="login registration-switch">
-            Not yet a user? Click
-            <a className="login registration-switch-link" href="/registration"> here </a>
-            to register!
-        </div>
         </div>
       </div>
     </BaseContainer>
@@ -102,4 +90,4 @@ const Login = props => {
  * You can get access to the history object's properties via the withRouter.
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
-export default Login;
+export default ProfileEditor;

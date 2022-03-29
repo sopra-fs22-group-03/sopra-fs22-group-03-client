@@ -6,10 +6,13 @@ import {useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import "styles/views/Game.scss";
+import {Link} from 'react-router-dom';
+import User from 'models/User';
+
 
 const Player = ({user}) => (
   <div className="player container">
-    <div className="player username">{user.username}</div>
+    <Link className="player username" to={'/profile/' + user.id}>{user.username}</Link>
     <div className="player name">{user.name}</div>
     <div className="player id">id: {user.id}</div>
   </div>
@@ -31,8 +34,27 @@ const Game = () => {
   const [users, setUsers] = useState(null);
 
   const logout = () => {
-    localStorage.removeItem('token');
-    history.push('/login');
+    let userId = localStorage.getItem('currentUser');
+
+    const doLogout = async () => {
+      try {
+        const response = await api.post(`/users/${userId}/logout`);
+  
+        // Get the returned user
+        const user = new User(response.data);
+
+        console.log("Status of user with id " + user.id + " is now: " + user.logged_in);
+  
+        // Logout successfully worked --> navigate to the route /login
+        localStorage.removeItem('token');
+        history.push('/login');
+
+      } catch (error) {
+        alert(`Something went wrong during the logout: \n${handleError(error)}`);
+      }
+    };
+
+    doLogout();
   }
 
   // the effect hook can be used to react to change in your component.
@@ -94,7 +116,7 @@ const Game = () => {
 
   return (
     <BaseContainer className="game container">
-      <h2>Happy Coding!</h2>
+      <h2>User Overview</h2>
       <p className="game paragraph">
         Get all users from secure endpoint:
       </p>
