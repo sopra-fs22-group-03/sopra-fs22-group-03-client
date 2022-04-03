@@ -21,7 +21,7 @@ const FormField = props => {
       </label>
       <input
         className="registration input"
-        placeholder="enter here.."
+        placeholder={props.placeholder}
         value={props.value}
         type = {props.type}
         onChange={e => props.onChange(e.target.value)}
@@ -38,12 +38,20 @@ FormField.propTypes = {
 
 const Registration = props => {
   const history = useHistory();
-  const [password, setName] = useState(null);
   const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [street, setStreet] = useState(null);
+  const [streetNo, setStreetNo] = useState(null);
+  const [zipCode, setZipCode] = useState(null);
+  const [city, setCity] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [creditCardNumber, setCreditCardNumber] = useState(null);
+  const [licensePlate, setLicensePlate] = useState(null);
 
   const doRegistration = async () => {
     try {
-      const requestBody = JSON.stringify({username, password});
+      const requestBody = JSON.stringify({username, password, street, streetNo, zipCode, city, phoneNumber, email, creditCardNumber, licensePlate});
       const response = await api.post('/users', requestBody);
 
       // Get the returned user and update a new object.
@@ -68,23 +76,71 @@ const Registration = props => {
         <div className="registration form">
           <FormField
             type = "text"
-            label="Username"
+            placeholder="Username"
             value={username}
             onChange={un => setUsername(un)}
           />
           <FormField
             type = "password"
-            label="Password"
+            placeholder="Password"
             value={password}
-            onChange={n => setName(n)}
+            onChange={n => setPassword(n)}
+          />
+          <FormField
+            type = "text"
+            placeholder="Street"
+            value={street}
+            onChange={n => setStreet(n)}
+          />
+          <FormField
+            type = "text"
+            placeholder="No."
+            value={streetNo}
+            onChange={n => setStreetNo(n)}
+          />
+          <FormField
+            type = "text"
+            placeholder="Zip Code"
+            value={zipCode}
+            onChange={n => setZipCode(n)}
+          />
+          <FormField
+            type = "text"
+            placeholder="City"
+            value={city}
+            onChange={n => setCity(n)}
+          />
+          <FormField
+            type = "text"
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChange={n => setPhoneNumber(n)}
+          />
+          <FormField
+            type = "text"
+            placeholder="Email"
+            value={email}
+            onChange={n => setEmail(n)}
+          />
+          <FormField
+            type = "text"
+            placeholder = "Credit card number"
+            value={creditCardNumber}
+            onChange={n => setCreditCardNumber(n)}
+          />
+          <FormField
+            type = "text"
+            placeholder="License plate (optional)"
+            value={licensePlate}
+            onChange={n => setLicensePlate(n)}
           />
           <div className="registration button-container">
             <Button
-              disabled={!username || !password}
+              disabled={!username || !password || !street || !streetNo || !zipCode || !city || !phoneNumber || !email || !creditCardNumber}
               width="100%"
               onClick={() => doRegistration()}
             >
-              Register
+              Submit
             </Button>
           </div>
           <div className="registration login-switch">
