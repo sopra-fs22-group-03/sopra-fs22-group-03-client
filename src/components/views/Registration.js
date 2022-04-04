@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {api, handleError} from 'helpers/api';
-import User from 'models/User';
-import {useHistory} from 'react-router-dom';
-import {Button} from 'components/ui/Button';
-import 'styles/views/Registration.scss';
+import React, { useState } from "react";
+import { api, handleError } from "helpers/api";
+import User from "models/User";
+import { useHistory } from "react-router-dom";
+import { Button } from "components/ui/Button";
+import "styles/views/Registration.scss";
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
@@ -13,18 +13,16 @@ however be sure not to clutter your files with an endless amount!
 As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
-const FormField = props => {
+const FormField = (props) => {
   return (
     <div className="registration field">
-      <label className="registration label">
-        {props.label}
-      </label>
+      <label className="registration label">{props.label}</label>
       <input
         className="registration input"
         placeholder={props.placeholder}
         value={props.value}
-        type = {props.type}
-        onChange={e => props.onChange(e.target.value)}
+        type={props.type}
+        onChange={(e) => props.onChange(e.target.value)}
       />
     </div>
   );
@@ -33,10 +31,10 @@ const FormField = props => {
 FormField.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
-const Registration = props => {
+const Registration = (props) => {
   const history = useHistory();
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -51,103 +49,141 @@ const Registration = props => {
 
   const doRegistration = async () => {
     try {
-      const requestBody = JSON.stringify({username, password, street, streetNo, zipCode, city, phoneNumber, email, creditCardNumber, licensePlate});
-      const response = await api.post('/users', requestBody);
+      const requestBody = JSON.stringify({
+        username,
+        password,
+        street,
+        streetNo,
+        zipCode,
+        city,
+        phoneNumber,
+        email,
+        creditCardNumber,
+        licensePlate,
+      });
+      const response = await api.post("/users", requestBody);
 
       // Get the returned user and update a new object.
       const user = new User(response.data);
 
       // Store the token into the local storage.
-      localStorage.setItem('token', user.token);
+      localStorage.setItem("token", user.token);
 
       // Store the ID of the currently logged-in user in localstorage
-      localStorage.setItem('currentUser', user.id);
+      localStorage.setItem("currentUser", user.id);
 
       // Registration successfully worked --> navigate to the route /game in the GameRouter
       history.push(`/game`);
     } catch (error) {
-      alert(`Something went wrong during the registration: \n${handleError(error)}`);
+      alert(
+        `Something went wrong during the registration: \n${handleError(error)}`
+      );
     }
+  };
+
+  const goToLogin = (login) => {
+    history.push("/login");
   };
 
   return (
     <BaseContainer>
+      <div className="registration to-login">
+        <Button onClick={() => goToLogin()}>Login</Button>
+        {/* <ReactLogo width="60px" height="60px"/> */}
+      </div>
       <div className="registration container">
         <div className="registration form">
           <FormField
-            type = "text"
+            type="text"
             placeholder="Username"
             value={username}
-            onChange={un => setUsername(un)}
+            onChange={(un) => setUsername(un)}
           />
           <FormField
-            type = "password"
+            type="password"
             placeholder="Password"
             value={password}
-            onChange={n => setPassword(n)}
+            onChange={(n) => setPassword(n)}
           />
           <FormField
-            type = "text"
+            type="text"
             placeholder="Street"
             value={street}
-            onChange={n => setStreet(n)}
+            onChange={(n) => setStreet(n)}
           />
           <FormField
-            type = "text"
+            type="text"
             placeholder="No."
             value={streetNo}
-            onChange={n => setStreetNo(n)}
+            onChange={(n) => setStreetNo(n)}
           />
           <FormField
-            type = "text"
+            type="text"
             placeholder="Zip Code"
             value={zipCode}
-            onChange={n => setZipCode(n)}
+            onChange={(n) => setZipCode(n)}
           />
           <FormField
-            type = "text"
+            type="text"
             placeholder="City"
             value={city}
-            onChange={n => setCity(n)}
+            onChange={(n) => setCity(n)}
           />
           <FormField
-            type = "text"
+            type="text"
             placeholder="Phone Number"
             value={phoneNumber}
-            onChange={n => setPhoneNumber(n)}
+            onChange={(n) => setPhoneNumber(n)}
           />
           <FormField
-            type = "text"
+            type="text"
             placeholder="Email"
             value={email}
-            onChange={n => setEmail(n)}
+            onChange={(n) => setEmail(n)}
           />
           <FormField
-            type = "text"
-            placeholder = "Credit card number"
+            type="text"
+            placeholder="Credit card number"
             value={creditCardNumber}
-            onChange={n => setCreditCardNumber(n)}
+            onChange={(n) => setCreditCardNumber(n)}
           />
           <FormField
-            type = "text"
+            type="text"
             placeholder="License plate (optional)"
             value={licensePlate}
-            onChange={n => setLicensePlate(n)}
+            onChange={(n) => setLicensePlate(n)}
           />
           <div className="registration button-container">
             <Button
-              disabled={!username || !password || !street || !streetNo || !zipCode || !city || !phoneNumber || !email || !creditCardNumber}
+              disabled={
+                !username ||
+                !password ||
+                !street ||
+                !streetNo ||
+                !zipCode ||
+                !city ||
+                !phoneNumber ||
+                !email ||
+                !creditCardNumber
+              }
               width="100%"
               onClick={() => doRegistration()}
             >
               Submit
             </Button>
           </div>
-          <div className="registration login-switch">
+          {/* <div className="registration login-switch">
             Already a user? Click
             <a className="registration login-switch-link" href="/login"> here </a>
             to login!
+        </div> */}
         </div>
+        <div className="registration sign-up">
+          <h1 className="header title">
+            Sign up today.
+            <br />
+            It's free!
+          </h1>
         </div>
       </div>
     </BaseContainer>

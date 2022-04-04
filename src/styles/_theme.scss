@@ -40,3 +40,15 @@ $borderRadius: 0.75em;
   align-items: center;
   justify-content: center;
 }
+
+@mixin left {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+}
+
+@mixin right {
+  display: flex;
+  align-items: right;
+  justify-content: right;
+}

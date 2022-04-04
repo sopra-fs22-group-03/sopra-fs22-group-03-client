@@ -4,9 +4,9 @@
   &.container {
     margin-top: 2em;
     min-height: 300px;
-    /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
-    @include center;
-    flex-direction: column;
+    /* we include the left mixin defined in _theme.scss and save three duplicate lines :) */
+    @include left;
+    flex-direction: row;
   }
   &.form {
     display: flex;
@@ -65,5 +65,15 @@
     font-style: italic;
     font-size: 13pt;
     text-decoration: none;
+  }
+  &.sign-up {
+    margin-top: 18em;
+    margin-left: 2em;
+    min-height: 300px;
+  }
+  &.to-login {
+    margin-top: 2em;
+    align-self: right;
+    @include right;
   }
 }
