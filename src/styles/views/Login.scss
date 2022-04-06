@@ -50,6 +50,9 @@
     justify-content: center;
     margin-top: 2em;
   }
+  &.login-button{
+    color: white;
+  }
   &.registration-switch {
     color: $textColor;
     margin-top: 10px;

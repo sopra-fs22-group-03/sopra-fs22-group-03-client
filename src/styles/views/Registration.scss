@@ -45,6 +45,9 @@
     text-transform: lowercase;
     font-weight: 300;
   }
+  &.loginbutton{
+    color: white;
+  }
   &.button-container {
     display: flex;
     justify-content: center;

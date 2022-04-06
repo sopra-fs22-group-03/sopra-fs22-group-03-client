@@ -1,0 +1,57 @@
+@import "styles/theme";
+
+.start{
+    &.container {
+        padding: 1.5em;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    &.logo{
+        width: 50%;
+    }
+
+    &.logo > img{
+        width: 100%;
+    }
+
+    &.title{
+        margin-top: 20px;
+        width: 50%;
+    }
+    
+    &.title > p{
+        text-align: center;
+        color: #192342;
+        font-style: italic;
+        font-size: 80px;
+    }
+    
+    &.buttons{
+        margin-top: 30px;
+        width: 50%;
+    }
+
+    &.button{
+        width: 100%;
+        color: white;
+    }
+    
+    &.login{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        color: #192342;
+    }
+    
+    &.registration{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+}

@@ -1,0 +1,12 @@
+@import 'styles/theme';
+
+.navbar {
+    &.color {
+        background-color:#192342;
+    }
+
+    &.navbar-brand > .navbar-custom > .navbar-text {
+    color: rgba(255,255,255,.8);
+    }
+}
+

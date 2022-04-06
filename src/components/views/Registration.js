@@ -88,7 +88,11 @@ const Registration = (props) => {
   return (
     <BaseContainer>
       <div className="registration to-login">
-        <Button onClick={() => goToLogin()}>Login</Button>
+        <Button 
+        className="registration loginbutton" 
+        onClick={() => goToLogin()}>
+          Login
+        </Button>
         {/* <ReactLogo width="60px" height="60px"/> */}
       </div>
       <div className="registration container">

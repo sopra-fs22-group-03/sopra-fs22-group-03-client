@@ -79,7 +79,7 @@ const Login = props => {
             onChange={n => setName(n)}
           />
           <div className="login button-container">
-            <Button
+            <Button className="login login-button"
               disabled={!username || !password}
               width="100%"
               onClick={() => doLogin()}
