@@ -159,6 +159,7 @@ const Registration = (props) => {
           />
           <div className="registration button-container">
             <Button
+              className="registration registration-button"
               disabled={
                 !username ||
                 !password ||

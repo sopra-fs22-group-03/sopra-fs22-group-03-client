@@ -21,7 +21,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Switch>
-      <Route exact path="/start">
+      <Route exact path="/">
           <Start/>
         </Route>
         <Route path="/game">
