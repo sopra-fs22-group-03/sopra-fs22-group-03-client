@@ -9,13 +9,13 @@
 
 .game {
   &.container {
-    background: $background;
     padding: 1.5em;
     border-radius: $borderRadius;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: $dropShadow;
+    color: black;
   }
   &.user-list {
     list-style: none;
@@ -27,6 +27,9 @@
     align-items: center;
     justify-content: center;
   }
+  &.logout-button{
+    color: white;
+  }
   & p,
   h2 {
     margin: 0.5em 0;
@@ -36,26 +39,39 @@
 .player {
   &.container {
     margin: 0.5em 0;
-    width: 20em;
+    width: 30em;
     padding: 10px;
     border-radius: $borderRadius;
     display: flex;
     align-items: center;
-    background: lighten($background, 5);
+    background: blue;
   }
   &.name {
     font-weight: 300;
     margin-left: 5px;
+    color: white;
+    font-weight: bold;
+  }
+  &.tariff {
+    margin-left: auto;
+    font-family: $fontMono;
+    font-weight: 300;
+    color: white;
+    font-weight: bold;
   }
   &.username {
     font-weight: 500;
     color: $accent;
     text-decoration: none;
+    color: white;
+    font-weight: bold;
   }
-  &.id {
+  &.capacity {
     margin-left: auto;
     margin-right: 10px;
     font-family: $fontMono;
     font-weight: 300;
+    color: white;
+    font-weight: bold;
   }
 }
