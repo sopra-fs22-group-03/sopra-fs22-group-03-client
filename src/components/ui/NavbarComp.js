@@ -8,18 +8,18 @@ const NavbarComp = () => {
     return <div>
         <Navbar className="navbar fixed-top color navbar-dark" expand="lg">
             <Container>
-                <a className="navbar-brand" href="/start">
+                <a className="navbar-brand" href="/">
                     <img src={Logo} height="36"></img>
                 </a>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="navbar-collapse justify-content-center">
                     <Nav.Link href="/game/dashboard">Tabular Overview</Nav.Link>
-                    <Nav.Link href="#link">Map</Nav.Link>
-                    <Nav.Link href="#home">Billing</Nav.Link>
-                    <Nav.Link href="#link">Reservations</Nav.Link>
-                    <Nav.Link href="#home">Profile</Nav.Link>
-                    <Nav.Link href="#link">Logout</Nav.Link>
+                    <Nav.Link href="/map">Map</Nav.Link>
+                    <Nav.Link href="/billing">Billing</Nav.Link>
+                    <Nav.Link href="/reservations">Reservations</Nav.Link>
+                    <Nav.Link href="/profile">Profile</Nav.Link>
+                    <Nav.Link href="/logout">Logout</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>
