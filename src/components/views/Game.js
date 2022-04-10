@@ -9,12 +9,15 @@ import "styles/views/Game.scss";
 import { Link } from "react-router-dom";
 import User from "models/User";
 import Carpark from "models/Carpark";
+import NavbarComp from "components/ui/NavbarComp";
 
 const Player = ({ carpark }) => (
   <div className="player container">
-    <Link className="player name" to={"/carparks/" + carpark.carparkId}>
-      {carpark.name}
-    </Link>
+    <div>
+      <Link className="player name" to={"/carparks/" + carpark.carparkId}>
+        {carpark.name}
+      </Link>
+    </div>
     <div className="player tariff">
       {carpark.hourlyTariff} CHF
     </div>
@@ -114,12 +117,12 @@ const Game = () => {
 
   if (carparks) {
     content = (
-      <div className="game">
-        <tr>
-          <th align="left">Name of Carpark</th>
-          <th align="center">Tariff (per hour)</th>
-          <th align="right">Current Capacity</th>
-        </tr>
+      <div className="game main">
+        <div className="game description">
+          <div className="game parkname">Name of Carpark</div>
+          <div className="game tariff">Tariff (per hour)</div>
+          <div className= "game capacity">Current Capacity</div>
+        </div>
         <ul className="game user-list">
           {carparks.map((carpark) => (
             <Player carpark={carpark} key={carpark.carparkId} />
@@ -137,10 +140,13 @@ const Game = () => {
   }
 
   return (
+    <div>
+      <NavbarComp />
     <BaseContainer className="game container">
-      <h2>Carpark Overview</h2>
+      <h2 className="game title">Carpark Overview</h2>
       {content}
     </BaseContainer>
+    </div>
   );
 };
 
