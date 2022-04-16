@@ -1,0 +1,162 @@
+@import "styles/theme";
+
+.carpark {
+
+    /////////////////////////////////////////////////////////////////
+    ////////////////////////////// Header ///////////////////////////
+    /////////////////////////////////////////////////////////////////
+    
+    
+    &.header{
+        margin-top: 10%;
+        padding: 10px;
+        background: #567DF4;
+        border-radius: $borderRadius;
+        font-family: $fontDefault;
+        display: flex;
+
+    }
+
+    &.header > div{
+        display: flex;
+        width: 50%;
+    }
+
+
+    &.title{
+        justify-content: left;
+    }
+
+    &.empty{
+        justify-content: right;
+    }
+
+    
+    /////////////////////////////////////////////////////////////////
+    /////////////////////// general elements ////////////////////////
+    /////////////////////////////////////////////////////////////////
+
+    &.adressAndHours{
+        font-family: $fontDefault;
+        margin-top: 5%;
+        width: 100%;
+        display: flex;
+    }
+
+    &.tariffAndRemarks{
+        font-family: $fontDefault;
+        width: 100%;
+        margin-top: 5%;
+        display: flex;
+    }
+
+    &.leftElement{
+        margin-right: 2%;
+        width: 48%;
+    }
+
+    &.rightElement{
+        margin-left: 2%;
+        width: 48%;
+    }
+
+    &.elementTitle{
+        color: black;
+        text-decoration-line:underline;
+        font-weight: bold;
+        font-size: 150%;
+        margin-bottom: 3%;
+    }
+
+    &.elementTitle:after {
+        content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+    }
+
+    &.Details{
+        background: rgba(86, 125, 244, 0.5);
+        border-radius: 25px;
+        padding: 1%;
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+
+    &.Details > div{
+        background: #CCCCCC;
+        border-radius: 50px;
+        padding: 2%;
+        margin: 2%;
+    }
+
+    
+    /////////////////////////////////////////////////////////////////
+    ///////////////////////////// adress ////////////////////////////
+    /////////////////////////////////////////////////////////////////
+
+    &.street{
+        width: 100%;
+        justify-content: left;
+        order: 1;
+    }
+
+    &.zip{
+        order: 2;
+        flex: 0 0 30.6%; // the margin of adressDetails takes 4*2% = 8%. Therefore:92/3 = 
+    }
+
+    &.city {
+        order: 3;
+        flex: 0 0 61.3%; // 2* 30.6 = 61.3%
+    }
+
+    
+    /////////////////////////////////////////////////////////////////
+    //////////////////////////// hours //////////////////////////////
+    /////////////////////////////////////////////////////////////////
+
+    &.weekTitle{
+        background: none !important;
+        font-weight: bold;
+        flex: 0 0 30.6%;
+
+    }
+
+    &.week{
+        flex: 0 0 61.3%;
+    }
+
+    /////////////////////////////////////////////////////////////////
+    //////////////////////////// buttons ////////////////////////////
+    /////////////////////////////////////////////////////////////////
+
+    &.buttons{
+        margin-top: 5%;
+        display: flex;
+        justify-content: right;
+    }
+
+    &.buttons > Button{
+        color: white;
+        width: 23.3%;
+    }
+
+    &.check-in{
+        margin-right: 1%;
+    }
+
+    &.reservations{
+        margin-left: 1%;
+    }
+
+}
+
+.booking{
+    &.container{
+        color: "black";
+        background: rgba(86, 125, 244, 0.75);
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 5%;
+        overflow: "hidden";
+    }
+}
