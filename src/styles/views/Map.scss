@@ -1,8 +1,36 @@
 @import "styles/theme";
 
+.player {
+  &.container {
+    width: 100%;
+    padding: 5px;
+    justify-content: center;
+    font-family: $fontMono;
+    font-size: medium;
+    color: white;
+    font-weight: bold;
+    border-radius: $borderRadius;
+    display: flex;
+    align-items: left;
+    background: #567DF4;
+  }
+  &.container > div{
+    display: flex;
+    width: 33.33333%;
+  }
+  &.center {
+    align-items: center;
+  }
+}
+
+h2 {
+  width: 70%;
+  text-align: right;
+}
+
+
 .leaflet-container {
     margin-top: 60px;
     width: 100%;
     height: 93.5vh;
   }
-
