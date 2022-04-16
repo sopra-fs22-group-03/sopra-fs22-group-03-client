@@ -8,26 +8,75 @@ import {useHistory} from 'react-router-dom';
 import NavbarComp from "components/ui/NavbarComp";
 import "styles/views/DetailPageCarPark.scss";
 import {Button} from 'components/ui/Button';
+import { FormField } from "components/ui/FormField";
 
-const ReservationWindow = () => {
+const Booking = () => {
+    const [checkinDate, setCheckinDate] = useState(null);
+    const [checkinTime, setCheckinTime] = useState(null);
+    const [checkoutDate, setCheckoutDate] = useState(null);
+    const [checkoutTime, setCheckoutTime] = useState(null);
+
+    const doBooking = async () => {
+
+
+    }
+
     return(
-        <div className="reservation container">
-            Hello World!
-            
-        </div>
+        <div className="booking container">
+            <div className = "booking checkinAll">
+                <div className = "booking checkin">
+                    Check-in
+                </div>
+                <FormField 
+                className = "booking beginDate"
+                innerLabel = "date at beginning"
+                value = {checkinDate}
+                onChange={x => setCheckinDate(x)}>
 
+                </FormField>
+                <FormField 
+                className = "booking beginTime"
+                innerLabel = "time at beginning"
+                value = {checkinTime}
+                onChange={x => setCheckinTime(x)}>
+
+                </FormField>
+                <div className = "booking checkout">
+                    Check-out
+                </div>
+                <FormField 
+                className = "booking endDate"
+                innerLabel = "date at end"
+                value = {checkoutDate}
+                onChange={x => setCheckoutDate(x)}>
+
+                </FormField>
+                <FormField 
+                className ="booking endTime"
+                innerLabel = "time at end"
+                value = {checkoutTime}
+                onChange={x => setCheckoutTime(x)}>
+
+                </FormField>
+                <Button 
+                className = "booking button"
+                disabled={!checkinDate || !checkinTime || !checkoutDate || !checkoutTime}
+                width="100%"
+                onClick={() => doBooking()}
+                >
+                    BOOK
+                </Button>
+            </div>
+        </div>
     );
-}; 
+}
 
 
 const DetailPageCarPark = () => {
     const history = useHistory();
-    //const {parkingId} = useParams();
+    const [isTrue, setIsTrue] = useState(false);
+    const {parkingId} = useParams();
     const[ParkingData, setParkingData] = useState([]);
-
-    // change these two!
-    console.log(parkingId)
-    let parkingId = 100000;
 
     useEffect(() => {
         async function fetchData() {
@@ -39,11 +88,6 @@ const DetailPageCarPark = () => {
 
     const doCheckin = async () => {
 
-
-    }
-
-    const doReservation = async () => {
-        <ReservationWindow />
 
     }
 
@@ -133,11 +177,17 @@ const DetailPageCarPark = () => {
                 </Button>
 
                 <Button 
-                onClick={() => doReservation()}
+                onClick={() => setIsTrue(!isTrue)}
                 className = "carpark reservation">
                     Reservation
                 </Button>
             </div>
+
+            {
+                isTrue && <Booking />
+            }
+
+
             {/*------------------- head --------------------- */}
         </BaseContainer>
         </>
