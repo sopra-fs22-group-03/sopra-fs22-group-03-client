@@ -44,7 +44,7 @@ const AppRouter = () => {
         <Route exact path="/registration">
           <Registration/>
         </Route>
-        <Route exact path = "carparks/:parkingId">
+        <Route exact path = "/new/100000">
           <DetailPageCarPark />
         </Route>
         <Route exact path="/profile/:userId" children={
