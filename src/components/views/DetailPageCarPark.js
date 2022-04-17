@@ -1,7 +1,7 @@
 import React from "react";
 import BaseContainer from "components/ui/BaseContainer";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import {api} from 'helpers/api';
+import {api, handleError} from 'helpers/api';
 import {useEffect, useState} from 'react';
 import "styles/views/Profile.scss";
 import {useHistory} from 'react-router-dom';
@@ -10,62 +10,91 @@ import "styles/views/DetailPageCarPark.scss";
 import {Button} from 'components/ui/Button';
 import { FormField } from "components/ui/FormField";
 
-const Booking = () => {
+const Booking = props => {
+
     const [checkinDate, setCheckinDate] = useState(null);
     const [checkinTime, setCheckinTime] = useState(null);
     const [checkoutDate, setCheckoutDate] = useState(null);
     const [checkoutTime, setCheckoutTime] = useState(null);
+    const parkingId = props.parkingId;
+    const userId = 1; // change this here to the actual user id
+
 
     const doBooking = async () => {
+        try {
+            const requestBody = JSON.stringify({
+                userId,
+                parkingId,
+                checkinDate,
+                checkinTime,
+                checkoutDate,
+                checkoutTime
+            });
+            const response = await api.post("/reservations", requestBody);
 
+        } catch (error) {
+            alert(
+              `Something went wrong during reservation: \n${handleError(error)}`
+            );
+        }
 
     }
 
     return(
         <div className="booking container">
             <div className = "booking checkinAll">
-                <div className = "booking checkin">
-                    Check-in
+                <div className = "booking checkinContainer">
+                    <div className = "booking check">
+                        Check-in
+                    </div>
+                    <div className = "booking date">
+                        <FormField 
+                        innerLabel = "date at beginning"
+                        value = {checkinDate}
+                        onChange={x => setCheckinDate(x)}>
+                        </FormField>
+                    </div>
+                    <div className = "booking time">
+                        <FormField 
+                        innerLabel = "time at beginning"
+                        value = {checkinTime}
+                        onChange={x => setCheckinTime(x)}>
+                        </FormField>
+                    </div>
                 </div>
-                <FormField 
-                className = "booking beginDate"
-                innerLabel = "date at beginning"
-                value = {checkinDate}
-                onChange={x => setCheckinDate(x)}>
+                <div className="booking checkoutContainer">
+                    <div className = "booking check">
+                        Check-out
+                    </div>
+                    <div className = "booking date">
+                        <FormField 
+                        innerLabel = "date at end"
+                        value = {checkoutDate}
+                        onChange={x => setCheckoutDate(x)}>
+                        </FormField>
+                    </div>
+                    <div className = "booking time">
+                        <FormField 
+                        innerLabel = "time at end"
+                        value = {checkoutTime}
+                        onChange={x => setCheckoutTime(x)}>
 
-                </FormField>
-                <FormField 
-                className = "booking beginTime"
-                innerLabel = "time at beginning"
-                value = {checkinTime}
-                onChange={x => setCheckinTime(x)}>
-
-                </FormField>
-                <div className = "booking checkout">
-                    Check-out
+                        </FormField>
+                    </div>
                 </div>
-                <FormField 
-                className = "booking endDate"
-                innerLabel = "date at end"
-                value = {checkoutDate}
-                onChange={x => setCheckoutDate(x)}>
+                <div className = "booking buttonContainer">
+                    <div className ="booking button">
+                        <Button 
+                        disabled={!checkinDate || !checkinTime || !checkoutDate || !checkoutTime}
+                        width="100%"
+                        onClick={() => doBooking()}
+                        >
+                            BOOK
+                        </Button>
+                    </div>
+                    
+                </div>
 
-                </FormField>
-                <FormField 
-                className ="booking endTime"
-                innerLabel = "time at end"
-                value = {checkoutTime}
-                onChange={x => setCheckoutTime(x)}>
-
-                </FormField>
-                <Button 
-                className = "booking button"
-                disabled={!checkinDate || !checkinTime || !checkoutDate || !checkoutTime}
-                width="100%"
-                onClick={() => doBooking()}
-                >
-                    BOOK
-                </Button>
             </div>
         </div>
     );
@@ -77,6 +106,7 @@ const DetailPageCarPark = () => {
     const [isTrue, setIsTrue] = useState(false);
     const {parkingId} = useParams();
     const[ParkingData, setParkingData] = useState([]);
+    const userId = 1; //change this once clear
 
     useEffect(() => {
         async function fetchData() {
@@ -87,8 +117,27 @@ const DetailPageCarPark = () => {
     });
 
     const doCheckin = async () => {
+        try {
 
+            const requestBody = JSON.stringify({
+                userId
+            });
+            const response = await api.post(`/carparks/${parkingId}/checkin`, requestBody);
 
+        } catch (error) {
+
+            try{
+                const requestBody = JSON.stringify({
+                    userId
+                });
+                const response = await api.post(`/carparks/${parkingId}/checkout`, requestBody);
+            
+            } catch (error) {
+                alert(
+                    `Fatal error, checkin doesn't work at the moment: \n${handleError(error)}`
+                  );
+            }
+        }
     }
 
     return (
@@ -172,7 +221,9 @@ const DetailPageCarPark = () => {
                   
             </div>
             <div className="carpark buttons">
-                <Button className = "carpark check-in"> 
+                <Button 
+                onClick={() => doCheckin()}
+                className = "carpark check-in"> 
                     Check-in
                 </Button>
 
@@ -184,7 +235,7 @@ const DetailPageCarPark = () => {
             </div>
 
             {
-                isTrue && <Booking />
+                isTrue && <Booking parkingId={parkingId}/>
             }
 
 
