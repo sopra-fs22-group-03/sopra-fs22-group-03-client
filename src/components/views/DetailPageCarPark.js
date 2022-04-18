@@ -10,6 +10,8 @@ import "styles/views/DetailPageCarPark.scss";
 import {Button} from 'components/ui/Button';
 import { FormField } from "components/ui/FormField";
 
+//https://stackoverflow.com/questions/68262482/how-do-i-change-the-color-of-a-button-when-clicked-in-react
+
 const Booking = props => {
 
     const [checkinDate, setCheckinDate] = useState(null);
@@ -97,6 +99,7 @@ const Booking = props => {
 
             </div>
         </div>
+        
     );
 }
 
@@ -107,6 +110,8 @@ const DetailPageCarPark = () => {
     const {parkingId} = useParams();
     const[ParkingData, setParkingData] = useState([]);
     const userId = 1; //change this once clear
+    const [btnString, setBtnString] = useState("check-in");
+    const [btnColor, setBtnColor] = useState("#192342");
 
     useEffect(() => {
         async function fetchData() {
@@ -117,20 +122,30 @@ const DetailPageCarPark = () => {
     });
 
     const doCheckin = async () => {
+                
         try {
-
+            
             const requestBody = JSON.stringify({
-                userId
+                userId,
+                parkingId
             });
             const response = await api.post(`/carparks/${parkingId}/checkin`, requestBody);
+            setBtnString("check-out");
+            setBtnColor("#FF2E79")
 
         } catch (error) {
 
             try{
+                
                 const requestBody = JSON.stringify({
-                    userId
+                    userId,
+                    parkingId
                 });
                 const response = await api.post(`/carparks/${parkingId}/checkout`, requestBody);
+
+                setBtnString("check-in")
+                setBtnColor("#192342")
+                
             
             } catch (error) {
                 alert(
@@ -223,8 +238,9 @@ const DetailPageCarPark = () => {
             <div className="carpark buttons">
                 <Button 
                 onClick={() => doCheckin()}
-                className = "carpark check-in"> 
-                    Check-in
+                className = "carpark check-in"
+                style={{ backgroundColor: btnColor }}> 
+                    {btnString}
                 </Button>
 
                 <Button 
