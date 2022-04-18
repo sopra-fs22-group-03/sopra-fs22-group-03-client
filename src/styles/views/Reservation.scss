@@ -1,0 +1,177 @@
+@import "styles/theme";
+
+.reservation{
+
+    &.titleRow{
+        padding: 1%;
+        width: 100%;
+    }
+
+    &.mainTitle{
+        display: flex;
+        justify-content: center;
+        font-weight: bolder;
+        font-size: 225%;
+        color: $accent;
+    }
+}
+
+.unit{
+    &.container{
+        background: rgba(86, 125, 244, 0.75);
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 1%;
+    }
+
+    &.firstRowLeft{
+        flex: 0 0 60%;
+        order: 1;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+
+    
+    &.rowOne{
+        display: flex;
+        width: 100%;
+        order: 1;
+        
+    }
+
+    &.rowOne > div{
+        margin-right: 5%;
+        font-family: $fontDefault;
+    }
+
+    &.rowTwo{
+        display: flex;
+        width: 100%;
+        order:2;
+    }
+    &.rowTwo > div{
+        margin-right: 5%;
+        font-family: $fontDefault;
+    }
+
+    &.check{
+        width: 100px;
+        font-weight: bold;
+        padding-top: 10%;
+    }
+
+    &.checkDate{
+        width:120%;
+        background-color: #6A6A6A;
+        border-radius: 50px;
+        padding: 10%;
+        margin-bottom: 10px;
+    }
+
+    &.checkTime{
+        width:120%;
+        padding: 4%;
+        background: rgba(204, 204, 204, 0.9);
+        border-radius: 50px;
+        padding: 10%;
+
+    }
+
+    &.firstRowRight{
+        font-family: $fontDefault;
+        flex: 0 0 20%;
+        order: 2;
+    }
+
+    &.firstRowRight > div{
+        display: flex;
+        justify-content: right;
+    }
+
+    &.parkingName{
+        font-weight: bold;
+    }
+
+    &.thirdRow{
+        flex: 0 0 100%;
+        order: 4;
+        display: flex;
+        justify-content: space-between;
+        font-family: $fontDefault;
+        font-weight: bold;
+        margin-top: 2%;
+    }
+    &.buttons{
+        width: 50%;
+        display: flex;
+        justify-content: right;
+    }
+
+    &.buttons > Button{
+        margin-left: 15px;
+        background-color: rgba(255, 46, 121, 0.9);
+        color: white;
+    }
+
+
+}
+
+.booking{
+    &.container{
+        color: "black";
+        background: rgba(86, 125, 244, 1);
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 0%;
+        margin-bottom: 5%;
+        width: 100%;
+        overflow: "hidden";
+    }
+
+    &.checkinContainer{
+        display: flex;
+    }
+
+    &.checkoutContainer{
+        display: flex;
+    }
+
+    &.check{
+        font-family: $fontDefault;
+        font-weight: bold;
+        padding-top: 1.5%;
+        width: 15%;
+    }
+
+    &.date{
+        width: 30%;
+        flex: 0 0 25%;
+        margin-right: 1%;
+    }
+
+    &.time{
+        width: 30%;
+        flex: 0 0 30%;
+        margin-left: 1%;
+    }
+
+    &.buttonContainer{
+        width: 100%;
+        display: flex;
+        justify-content: right;
+    }
+
+    &.button{
+        width: 20%;
+    }
+
+    &.button > Button{
+        color: white;
+        background: rgba(255, 46, 121, 0.9);
+    }
+
+
+}

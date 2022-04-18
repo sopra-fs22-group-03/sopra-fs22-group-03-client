@@ -9,6 +9,7 @@ import ProfileEditor from 'components/views/ProfileEditor';
 import Start from 'components/views/Start';
 import Map from 'components/views/Map';
 import DetailPageCarPark from "components/views/DetailPageCarPark";
+import Reservation from "components/views/Reservation";
 
 /**
  * Main router of your application.
@@ -44,9 +45,16 @@ const AppRouter = () => {
         <Route exact path="/registration">
           <Registration/>
         </Route>
-        <Route exact path = "/carparks/:parkingId">
-          <DetailPageCarPark />
-        </Route>
+        <Route exact path = "/carparks/:parkingId" children={
+          <GameGuard>
+            <DetailPageCarPark />
+          </GameGuard>
+        }/>
+        <Route exact path = "/reservations" children={
+          <GameGuard>
+            <Reservation />
+          </GameGuard>
+        }/>
         <Route exact path="/profile/:userId" children={
           <GameGuard>
             <Profile />

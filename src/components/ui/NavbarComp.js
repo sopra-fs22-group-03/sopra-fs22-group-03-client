@@ -16,7 +16,7 @@ const NavbarComp = () => {
                 <Nav className="navbar-collapse justify-content-center">
                     <Nav.Link href="/game/dashboard">Tabular Overview</Nav.Link>
                     <Nav.Link href="/map">Map</Nav.Link>
-                    <Nav.Link href="/billing">Billing</Nav.Link>
+                    <Nav.Link href= "/billing"> Billing</Nav.Link>
                     <Nav.Link href="/reservations">Reservations</Nav.Link>
                     <Nav.Link href="/profile">Profile</Nav.Link>
                     <Nav.Link href="/logout">Logout</Nav.Link>
