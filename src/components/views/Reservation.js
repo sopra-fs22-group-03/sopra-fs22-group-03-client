@@ -99,7 +99,7 @@ const Booking = props => {
 }
 
 
-const SingleUnit = props => {
+const ReservationUnit = props => {
 
     const [parkingData, setParkingData] = useState(null);
     const [isTrue, setIsTrue] = useState(false);
@@ -254,7 +254,7 @@ const Reservation = () => {
             </div>
             
             <div>
-                <SingleUnit data={reservationData} />
+                <ReservationUnit data={reservationData} />
             </div>
             
             

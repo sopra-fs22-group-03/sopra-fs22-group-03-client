@@ -10,6 +10,7 @@ import Start from 'components/views/Start';
 import Map from 'components/views/Map';
 import DetailPageCarPark from "components/views/DetailPageCarPark";
 import Reservation from "components/views/Reservation";
+import Billing from "components/views/Billing";
 
 /**
  * Main router of your application.
@@ -53,6 +54,11 @@ const AppRouter = () => {
         <Route exact path = "/reservations" children={
           <GameGuard>
             <Reservation />
+          </GameGuard>
+        }/>
+        <Route exact path = "/billing" children={
+          <GameGuard>
+            <Billing />
           </GameGuard>
         }/>
         <Route exact path="/profile/:userId" children={
