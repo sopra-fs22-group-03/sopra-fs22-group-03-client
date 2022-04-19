@@ -149,7 +149,7 @@ const Billing = () => {
     localStorage.setItem("userId", 1); //delete when finished
     const userId = localStorage.getItem("userId");
     const [billingData, setBillingData] = useState(null);
-
+    
     useEffect(() => {
         async function fetchData() {
             const response = await api.get(`/users/${userId}/billing`);
@@ -157,7 +157,7 @@ const Billing = () => {
             setBillingData(response.data);
         }
         fetchData()
-    });
+    }, []);
 
     console.log(billingData)
 

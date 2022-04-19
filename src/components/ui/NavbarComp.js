@@ -19,7 +19,7 @@ const NavbarComp = () => {
                     <Nav.Link href= "/billing"> Billing</Nav.Link>
                     <Nav.Link href="/reservations">Reservations</Nav.Link>
                     <Nav.Link href="/profile">Profile</Nav.Link>
-                    <Nav.Link href="/start">Logout</Nav.Link>
+                    <Nav.Link href="/login">Logout</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>

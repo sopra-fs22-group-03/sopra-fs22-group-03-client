@@ -119,7 +119,7 @@ const DetailPageCarPark = () => {
             setParkingData(response.data);
         }
         fetchData()
-    });
+    }, []);
 
     const doCheckin = async () => {
                 

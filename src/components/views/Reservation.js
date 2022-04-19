@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {api, handleError} from 'helpers/api';
 import {Button} from 'components/ui/Button';
 import "styles/views/Reservation.scss";
+import { Spinner } from "react-bootstrap";
 
 const Booking = props => {
 
@@ -13,21 +14,19 @@ const Booking = props => {
     const [checkinTime, setCheckinTime] = useState(null);
     const [checkoutDate, setCheckoutDate] = useState(null);
     const [checkoutTime, setCheckoutTime] = useState(null);
-    const parkingId = props.parkingId;
-    const userId = 1; // change this here to the actual user id
+    const reservationId = props.reservationId;
 
 
     const doBooking = async () => {
         try {
             const requestBody = JSON.stringify({
-                userId,
-                parkingId,
+                reservationId,
                 checkinDate,
                 checkinTime,
                 checkoutDate,
                 checkoutTime
             });
-            const response = await api.put("/reservations", requestBody);
+            const response = await api.put(`/reservations/${reservationId}`, requestBody);
 
         } catch (error) {
             alert(
@@ -101,26 +100,21 @@ const Booking = props => {
 
 const ReservationUnit = props => {
 
-    const [parkingData, setParkingData] = useState(null);
+    const [parkingData, setParkingData] = useState({});
     const [isTrue, setIsTrue] = useState(false);
-    const parkingId = 100001;
-
 
     useEffect(() => {
         async function fetchData() {
-            const response = await api.get(`/carparks/100000`); //change to ${props.data.parkingId}
+            const response = await api.get(`/carparks/${props.data.carparkId}`); 
             
             setParkingData(response.data);
         }
         fetchData()
-    });
+    }, []);
 
     const cancelReservation = async () => {
         try {
-            const requestBody = JSON.stringify({
-                //{props.data.reservationId}
-            });
-            const response = await api.delete(`/reservations/${props.data.reservationId}`, requestBody); 
+            const response = await api.delete(`/reservations/${props.data.reservationId}`); 
         } catch (error){
             alert(
                 `Fatal error: Something went wrong during Cancelation: \n${handleError(error)}`
@@ -141,13 +135,13 @@ const ReservationUnit = props => {
                     
                     <div>
                         <div className="unit checkDate">
-                            1/1/2022
+                            {props.data.checkinDate}
                         </div>
                     </div>
                     
                     <div>
                         <div className = "unit checkTime">
-                            14:00
+                            {props.data.checkinTime}
                         </div>
                     </div>
                 </div>
@@ -160,37 +154,37 @@ const ReservationUnit = props => {
                     </div>
                     <div>
                         <div className ="unit checkDate">
-                            2/1/2022
+                            {props.data.checkoutDate}
                         </div>
                     </div>
                     <div>
                         <div className = "unit checkTime">
-                            18.00
+                            {props.data.checkoutTime}
                         </div>
                     </div>
                 </div>
             </div>
             
-        
+            { parkingData ?
             <div className = "unit firstRowRight">
                 <div className= "unit parkingName">
                     {parkingData.name}
                 </div>
                 <div className="unit adress">
-                    {parkingData.streetNo} {parkingData.street}
+                    {parkingData.street} {parkingData.streetNo}
                 </div>
                 <div className="unit city">
                     {parkingData.zipCode} {parkingData.city}
                 </div>
-            </div>
+            </div> : <Spinner/>}
 
 
             <div className="unit thirdRow">
                 <div className="unit plate">
-                    ZH 109919
+                    {props.data.licensePlate}
                 </div>
                 <div className="unit amount">
-                    CHF 8.00
+                    CHF {props.data.parkingFee}
                 </div>
                 <div className = "unit buttons">
                     <Button
@@ -204,7 +198,7 @@ const ReservationUnit = props => {
                 </div>
             </div>
             {
-                isTrue && <Booking parkingId={parkingId}/>
+                isTrue && <Booking reservationId={props.data.reservationId}/>
             }
 
         </div>
@@ -217,31 +211,48 @@ const ReservationUnit = props => {
 const Reservation = () => {
     localStorage.setItem("userId", 1); // delete when finished
     const userId = localStorage.getItem("userId");
-    const [reservationData, setReservationData] = useState(null);
+    const [reservationData, setReservationData] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
             //const response = await api.get(`/users/${userId}/reservations`);
             const response = [
                 {
-                    "parkingId": 100002,
+                    "reservationId": 4,
+                    "userId": 1,
+                    "carparkId": 100002,
                     "checkinDate": "10/10/1997",
-                    "checkinTime": "19.30",
-                    "checkoutDate": "19/2/2999",
-                    "checkoutTime": "19.30"
+                    "checkinTime": "19:30",
+                    "checkoutDate": "19/8/2999",
+                    "checkoutTime": "19:31",
+                    "licensePlate": "Zh 157392403",
+                    "parkingFee": 2.812
                 },
                 {
-                    "parkingId": 100003,
-                    "checkinDate": "10/10/1997",
-                    "checkinTime": "19.30",
+                    "reservationId": 4,
+                    "userId": 1,
+                    "carparkId": 100003,
+                    "checkinDate": "10/12/1997",
+                    "checkinTime": "19:50",
                     "checkoutDate": "19/2/2999",
-                    "checkoutTime": "19.30"
+                    "checkoutTime": "19:32",
+                    "licensePlate": "Zh 108003",
+                    "parkingFee": 8.43
+
                 }
             ]
-            setReservationData(response.data);
+            setReservationData(response); // TODO: re-add .data when real data is back
         }
         fetchData()
-    });
+    }, []);
+
+    const reses = [];
+    for (let r of reservationData) {
+        reses.push(<ReservationUnit data={r} key={r.parkingId} user={userId}/>);
+    }
+    
+    // const reses2 = reservationData.map(d => <ReservationUnit data={d}/>); --> andere Möglichkeit
+                
 
     return(
         <>
@@ -254,7 +265,7 @@ const Reservation = () => {
             </div>
             
             <div>
-                <ReservationUnit data={reservationData} />
+                {reses}
             </div>
             
             
