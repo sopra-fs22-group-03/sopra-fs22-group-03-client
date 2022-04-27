@@ -19,14 +19,13 @@ const Booking = props => {
     const [checkoutDate, setCheckoutDate] = useState(null);
     const [checkoutTime, setCheckoutTime] = useState(null);
     const parkingId = props.parkingId;
-    const userId = 1; // change this here to the actual user id
-
+    const userId = 3; // change this here to the actual user id
 
     const doBooking = async () => {
         try {
             const requestBody = JSON.stringify({
-                userId,
                 parkingId,
+                userId,
                 checkinDate,
                 checkinTime,
                 checkoutDate,
@@ -126,8 +125,7 @@ const DetailPageCarPark = () => {
         try {
             
             const requestBody = JSON.stringify({
-                userId,
-                parkingId
+                userId
             });
             const response = await api.post(`/carparks/${parkingId}/checkin`, requestBody);
             setBtnString("check-out");
@@ -138,8 +136,7 @@ const DetailPageCarPark = () => {
             try{
                 
                 const requestBody = JSON.stringify({
-                    userId,
-                    parkingId
+                    userId
                 });
                 const response = await api.post(`/carparks/${parkingId}/checkout`, requestBody);
 

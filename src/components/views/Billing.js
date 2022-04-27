@@ -152,14 +152,24 @@ const Billing = () => {
     
     useEffect(() => {
         async function fetchData() {
-            const response = await api.get(`/users/${userId}/billing`);
+            const response = await api.get(`/billing/${userId}`)
+
             
-            setBillingData(response.data);
+            setBillingData(response);
         }
         fetchData()
     }, []);
 
-    console.log(billingData)
+
+    //const reses = [];
+    //for (let r of billingData) {
+    //    reses.push(<BillingUnit data={r} key={r.parkingId} user={userId}/>);
+    //}
+
+    //add after div:
+    //<div>
+    //  {reses}
+    //</div>
 
     return(
         <>
@@ -170,7 +180,8 @@ const Billing = () => {
                     Billing
                 </div>
             </div>
-            <BillingUnit></BillingUnit>
+            
+            <BillingUnit ></BillingUnit>
             {/* <BillingUnit id={userId} data={billingData} /> this should be mapped over. the data prop should get exactly one billing from the billingData list*/}
         </BaseContainer>
         
