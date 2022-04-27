@@ -28,6 +28,8 @@ const Booking = props => {
             });
             const response = await api.put(`/reservations/${reservationId}`, requestBody);
 
+            window.location.reload()
+
         } catch (error) {
             alert(
               `Something went wrong during reservation: \n${handleError(error)}`
@@ -115,6 +117,8 @@ const ReservationUnit = props => {
     const cancelReservation = async () => {
         try {
             const response = await api.delete(`/reservations/${props.data.reservationId}`); 
+
+            window.location.reload()
         } catch (error){
             alert(
                 `Fatal error: Something went wrong during Cancelation: \n${handleError(error)}`
@@ -209,39 +213,15 @@ const ReservationUnit = props => {
 };
 
 const Reservation = () => {
-    localStorage.setItem("userId", 1); // delete when finished
+    localStorage.setItem("userId", 200001); // delete when finished
     const userId = localStorage.getItem("userId");
     const [reservationData, setReservationData] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
-            //const response = await api.get(`/users/${userId}/reservations`);
-            const response = [
-                {
-                    "reservationId": 4,
-                    "userId": 1,
-                    "carparkId": 100002,
-                    "checkinDate": "10/10/1997",
-                    "checkinTime": "19:30",
-                    "checkoutDate": "19/8/2999",
-                    "checkoutTime": "19:31",
-                    "licensePlate": "Zh 157392403",
-                    "parkingFee": 2.812
-                },
-                {
-                    "reservationId": 4,
-                    "userId": 1,
-                    "carparkId": 100003,
-                    "checkinDate": "10/12/1997",
-                    "checkinTime": "19:50",
-                    "checkoutDate": "19/2/2999",
-                    "checkoutTime": "19:32",
-                    "licensePlate": "Zh 108003",
-                    "parkingFee": 8.43
+            const response = await api.get(`/users/${userId}/reservations`);
 
-                }
-            ]
-            setReservationData(response); // TODO: re-add .data when real data is back
+            setReservationData(response.data); // TODO: re-add .data when real data is back
         }
         fetchData()
     }, []);

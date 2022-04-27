@@ -18,20 +18,22 @@ const Booking = props => {
     const [checkinTime, setCheckinTime] = useState(null);
     const [checkoutDate, setCheckoutDate] = useState(null);
     const [checkoutTime, setCheckoutTime] = useState(null);
-    const parkingId = props.parkingId;
-    const userId = 3; // change this here to the actual user id
+    const carparkId = props.parkingId;
+    const userId = 200001; // change this here to the actual user id
 
     const doBooking = async () => {
         try {
             const requestBody = JSON.stringify({
-                parkingId,
                 userId,
+                carparkId,
                 checkinDate,
                 checkinTime,
                 checkoutDate,
                 checkoutTime
             });
             const response = await api.post("/reservations", requestBody);
+
+            window.location.reload()
 
         } catch (error) {
             alert(
@@ -108,7 +110,7 @@ const DetailPageCarPark = () => {
     const [isTrue, setIsTrue] = useState(false);
     const {parkingId} = useParams();
     const[ParkingData, setParkingData] = useState([]);
-    const userId = 1; //change this once clear
+    const userId = 200001; //change this once clear
     const [btnString, setBtnString] = useState("check-in");
     const [btnColor, setBtnColor] = useState("#192342");
 
