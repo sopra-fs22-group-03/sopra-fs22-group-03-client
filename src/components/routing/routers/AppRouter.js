@@ -11,6 +11,7 @@ import Map from 'components/views/Map';
 import DetailPageCarPark from "components/views/DetailPageCarPark";
 import Reservation from "components/views/Reservation";
 import Billing from "components/views/Billing";
+import Logout from "components/views/Logout";
 
 /**
  * Main router of your application.
@@ -69,6 +70,11 @@ const AppRouter = () => {
         <Route exact path="/profile/:userId/edit" children={
           <GameGuard>
             <ProfileEditor />
+          </GameGuard>
+        }/>
+        <Route exact path="/logout/:userId" children={
+          <GameGuard>
+            <Logout />
           </GameGuard>
         }/>
       </Switch>

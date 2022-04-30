@@ -5,6 +5,8 @@ import Logo from "../../img/Logo1White.png";
 
 
 const NavbarComp = () => {
+    let userId = localStorage.getItem("currentUser");
+    
     return <div>
         <Navbar className="navbar fixed-top color navbar-dark" expand="lg">
             <Container>
@@ -18,8 +20,8 @@ const NavbarComp = () => {
                     <Nav.Link href="/map">Map</Nav.Link>
                     <Nav.Link href= "/billing"> Billing</Nav.Link>
                     <Nav.Link href="/reservations">Reservations</Nav.Link>
-                    <Nav.Link href="/profile">Profile</Nav.Link>
-                    <Nav.Link href="/login">Logout</Nav.Link>
+                    <Nav.Link href={"/profile/" + userId}>Profile</Nav.Link>
+                    <Nav.Link href={"/logout/" + userId}>Logout</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>
