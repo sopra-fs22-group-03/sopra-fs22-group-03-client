@@ -6,6 +6,7 @@ import User from "models/User";
 import "styles/views/Profile.scss";
 import { Button } from "components/ui/Button";
 import { Link, useHistory, useLocation } from "react-router-dom";
+import NavbarComp from "components/ui/NavbarComp";
 
 const Profile = () => {
   let userIdOfCurrentUser = localStorage.getItem("currentUser");
@@ -13,9 +14,17 @@ const Profile = () => {
   let { userId } = useParams();
 
   const [username, setUsername] = useState(null);
-  const [logged_in, setLogged_in] = useState(null);
-  const [creationDate, setCreationDate] = useState(null);
-  const [birthday, setBirthday] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [street, setStreet] = useState(null);
+  const [streetNo, setStreetNo] = useState(null);
+  const [zipCode, setZipCode] = useState(null);
+  const [city, setCity] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [creditCardNumber, setCreditCardNumber] = useState(null);
+  const [licensePlate, setLicensePlate] = useState(null);
+  const [isManager, setIsManager] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   const loadProfile = async () => {
     try {
@@ -24,9 +33,17 @@ const Profile = () => {
       // Get the returned user and update a new object.
       const user = new User(response.data);
       setUsername(user.username);
-      setLogged_in(user.logged_in);
-      setCreationDate(user.creationDate);
-      setBirthday(user.birthday);
+      setPassword(user.password);
+      setStreet(user.street);
+      setStreetNo(user.streetNo);
+      setZipCode(user.zipCode);
+      setCity(user.city);
+      setPhoneNumber(user.phoneNumber);
+      setEmail(user.email);
+      setCreditCardNumber(user.creditCardNumber);
+      setLicensePlate(user.licensePlate);
+      setIsManager(user.isManager);
+      setIsLoggedIn(user.isLoggedIn);
     } catch (error) {
       alert(
         `Something went wrong while loading the profile page: \n${handleError(
@@ -42,46 +59,106 @@ const Profile = () => {
   const history = useHistory();
 
   return (
-    <BaseContainer>
-      {userIdOfCurrentUser === userId ? (
-        <>
-          <div className="back button-container">
-            <Button width="20%" onClick={() => history.push("/game")}>
-              Go to user overview
-            </Button>
-          </div>
-          <h1>Profile page of user: {username}</h1>
-          <table>
-            <tr>
-              <td>Username</td>
-              <td>{username}</td>
-            </tr>
-            <tr>
-              <td>Online Status</td>
-              <td>{logged_in ? "Online" : "Offline"}</td>
-            </tr>
-            <tr>
-              <td>Creation Date</td>
-              <td>{creationDate}</td>
-            </tr>
-            <tr>
-              <td>Birthday</td>
-              <td>{birthday}</td>
-            </tr>
-          </table>
-          <div className="edit button-container">
-            <Button
-              width="50%"
-              onClick={() => history.push(`${currentPath}/edit`)}
-            >
-              Edit
-            </Button>
-          </div>
-        </>
-      ) : (
-        <a></a>
-      )}
-    </BaseContainer>
+    <div>
+      <NavbarComp />
+      <BaseContainer>
+        {userIdOfCurrentUser === userId ? (
+          <>
+            <h1 className="edit title">Profile page of user: {username}</h1>
+            {/* <table>
+              <tr>
+                <td>Username</td>
+                <td>{username}</td>
+              </tr>
+              <tr>
+                <td>Online Status</td>
+                <td>{isLoggedIn ? "Online" : "Offline"}</td>
+              </tr>
+              <tr>
+                <td>Creation Date</td>
+                <td>{isManager}</td>
+              </tr>
+            </table> */}
+
+            //TODO: SCSS change titles of classNames (minor)
+            <div className="carpark adressAndHours ">
+              {/*------------------- Personal Info --------------------- */}
+              <div className="carpark leftElement">
+                <div className="carpark elementTitle">Personal Details</div>
+                <div className="carpark Details">
+                <div className = "carpark weekTitle">
+                            Username
+                        </div>
+                  <div className="carpark week">{username}</div>
+                  <div className = "carpark weekTitle">
+                            Manager/User
+                        </div>
+                  <div className="carpark week">
+                    {isManager ? "Carpark Manager" : "Carpark User"}
+                  </div>
+                  <div className = "carpark weekTitle">
+                            Status
+                        </div>
+                  <div className="carpark week">
+                    {isLoggedIn ? "Online" : "Offline"}
+                  </div>
+                  <div className = "carpark weekTitle">
+                            Street & Number
+                        </div>
+                  <div className="carpark week">
+                    {street + " " + streetNo}
+                  </div>
+                  <div className = "carpark weekTitle">
+                            PLZ & City
+                        </div>
+                  <div className="carpark week">{zipCode + " " + city}</div>
+                </div>
+              </div>
+
+              {/*------------------- Car Info --------------------- */}
+              <div className="carpark rightElement">
+                <div className="carpark elementTitle">Other Details</div>
+                <div className="carpark Details">
+                <div className = "carpark weekTitle">
+                            License Plate
+                        </div>
+                  <div className="carpark week">{licensePlate}</div>
+                  <div className = "carpark weekTitle">
+                            Phone Number
+                        </div>
+                  <div className="carpark week">
+                    {phoneNumber}
+                  </div>
+                  <div className = "carpark weekTitle">
+                            Email
+                        </div>
+                  <div className="carpark week">
+                    {email}
+                  </div>
+                  <div className = "carpark weekTitle">
+                            Credit Card Nr
+                        </div>
+                  <div className="carpark week">
+                    {creditCardNumber}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="edit button-container">
+              <Button
+                className="edit button"
+                width="50%"
+                onClick={() => history.push(`${currentPath}/edit`)}
+              >
+                Edit User Profile
+              </Button>
+            </div>
+          </>
+        ) : (
+          <a></a>
+        )}
+      </BaseContainer>
+    </div>
   );
 };
 

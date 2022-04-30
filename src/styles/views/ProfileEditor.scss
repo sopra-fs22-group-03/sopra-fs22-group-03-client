@@ -2,32 +2,37 @@
 
 .edit {
   &.container {
-    margin-top: 2em;
-    min-height: 300px;
-    /* we include the center mixin defined in _theme.scss and save three duplicate lines :) */
+    min-height: flex;
+    /* we include the left mixin defined in _theme.scss and save three duplicate lines :) */
     @include center;
-    flex-direction: column;
+    flex-direction: row;
   }
   &.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 60%;
-    max-width: 30em;
-    height: 20em;
-    font-size: 16px;
-    font-weight: 300;
-    padding-left: 37px;
-    padding-right: 37px;
-    border-radius: 0.75em;
-    background-color: $background;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    box-shadow: $dropShadow;
+    color: "black";
+    background: transparentize(rgba(184, 82, 120, 0.9), 0.2);
+    border-radius: 10px;
+    padding:15px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 50%;
+    overflow: "hidden";
   }
   &.field {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  &.title{
+    margin-top: 2em;
+    display: flex;
+    @include center;
+    font-weight: bold;
+    color: $accent;
+  }
+  &.note{
+    display: flex;
+    @include center;
+    color: $accent;
   }
   &.input {
     height: 35px;
@@ -35,21 +40,51 @@
     margin-left: -4px;
     border: none;
     border-radius: 0.75em;
-    margin-bottom: 20px;
-    background: transparentize(white, 0.85);
+    margin-bottom: 10px;
+    background: rgba(209, 92, 135, 0.9);
+    color: $textColor;
+  }
+  &.inputSmall {
+    height: 35px;
+    padding-left: 15px;
+    margin-left: -4px;
+    border: none;
+    width: 90%;
+    border-radius: 0.75em;
+    margin-bottom: 10px;
+    background: rgba(209, 92, 135, 0.9);
+    color: $textColor;
+  }
+  &.inputMiddle {
+    height: 35px;
+    padding-left: 15px;
+    margin-left: -4px;
+    border: none;
+    width: 98%;
+    border-radius: 0.75em;
+    margin-bottom: 10px;
+    background: rgba(209, 92, 135, 0.9);
     color: $textColor;
   }
   &.label {
     color: $textColor;
     margin-bottom: 10px;
+    text-transform: lowercase;
     font-weight: 300;
+  }
+  &.loginbutton{
+    color: white;
+    width: 10em;
+  }
+  &.registration-button{
+    color: white;
   }
   &.button-container {
     display: flex;
     justify-content: center;
     margin-top: 2em;
   }
-  &.registration-switch {
+  &.login-switch {
     color: $textColor;
     margin-top: 10px;
     margin-bottom: 1px;
@@ -58,11 +93,40 @@
     font-size: 13pt;
     text-align: center;
   }
-  &.registration-switch-link {
+  &.login-switch-link {
     color: green;
     font-weight: bold;
     font-style: italic;
     font-size: 13pt;
     text-decoration: none;
   }
+  &.sign-up {
+    margin-top: 18em;
+    margin-left: 2em;
+    min-height: 300px;
+  }
+  &.to-login {
+    margin-top: 2em;
+    align-self: right;
+    @include right;
+  }
+
+  /////////////////////////////////////////////////////////////////
+    ///////////////////////////// INPUT ////////////////////////////
+    /////////////////////////////////////////////////////////////////
+
+  &.smallInput{
+      margin-top: 10px;
+      flex: 0 0 15%;
+  }
+
+  &.largeInput {
+      margin-top: 10px;
+      flex: 0 0 87.5%;
+  }
 }
+
+  .side-by-side {
+    display: flex; 
+    width: 100%; 
+  }
