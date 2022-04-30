@@ -53,6 +53,24 @@ const Profile = () => {
     }
   };
 
+  const delProfile = async () => {
+    try {
+      // delete user profile
+      const del = await api.delete(`/users/${userId}/profile`);
+
+      // delete successfully worked -- return to start page
+      localStorage.removeItem("token");
+      localStorage.removeItem("currentUser");
+      history.push("/");
+    } catch (error) {
+      alert(
+        `Something went wrong while loading the profile page: \n${handleError(
+          error
+        )}`
+      );
+    }
+  };
+
   loadProfile();
   const location = useLocation();
   const currentPath = location.pathname;
@@ -79,38 +97,25 @@ const Profile = () => {
                 <td>{isManager}</td>
               </tr>
             </table> */}
-
             //TODO: SCSS change titles of classNames (minor)
             <div className="carpark adressAndHours ">
               {/*------------------- Personal Info --------------------- */}
               <div className="carpark leftElement">
                 <div className="carpark elementTitle">Personal Details</div>
                 <div className="carpark Details">
-                <div className = "carpark weekTitle">
-                            Username
-                        </div>
+                  <div className="carpark weekTitle">Username</div>
                   <div className="carpark week">{username}</div>
-                  <div className = "carpark weekTitle">
-                            Manager/User
-                        </div>
+                  <div className="carpark weekTitle">Manager/User</div>
                   <div className="carpark week">
                     {isManager ? "Carpark Manager" : "Carpark User"}
                   </div>
-                  <div className = "carpark weekTitle">
-                            Status
-                        </div>
+                  <div className="carpark weekTitle">Status</div>
                   <div className="carpark week">
                     {isLoggedIn ? "Online" : "Offline"}
                   </div>
-                  <div className = "carpark weekTitle">
-                            Street & Number
-                        </div>
-                  <div className="carpark week">
-                    {street + " " + streetNo}
-                  </div>
-                  <div className = "carpark weekTitle">
-                            PLZ & City
-                        </div>
+                  <div className="carpark weekTitle">Street & Number</div>
+                  <div className="carpark week">{street + " " + streetNo}</div>
+                  <div className="carpark weekTitle">PLZ & City</div>
                   <div className="carpark week">{zipCode + " " + city}</div>
                 </div>
               </div>
@@ -119,28 +124,14 @@ const Profile = () => {
               <div className="carpark rightElement">
                 <div className="carpark elementTitle">Other Details</div>
                 <div className="carpark Details">
-                <div className = "carpark weekTitle">
-                            License Plate
-                        </div>
+                  <div className="carpark weekTitle">License Plate</div>
                   <div className="carpark week">{licensePlate}</div>
-                  <div className = "carpark weekTitle">
-                            Phone Number
-                        </div>
-                  <div className="carpark week">
-                    {phoneNumber}
-                  </div>
-                  <div className = "carpark weekTitle">
-                            Email
-                        </div>
-                  <div className="carpark week">
-                    {email}
-                  </div>
-                  <div className = "carpark weekTitle">
-                            Credit Card Nr
-                        </div>
-                  <div className="carpark week">
-                    {creditCardNumber}
-                  </div>
+                  <div className="carpark weekTitle">Phone Number</div>
+                  <div className="carpark week">{phoneNumber}</div>
+                  <div className="carpark weekTitle">Email</div>
+                  <div className="carpark week">{email}</div>
+                  <div className="carpark weekTitle">Credit Card Nr</div>
+                  <div className="carpark week">{creditCardNumber}</div>
                 </div>
               </div>
             </div>
@@ -151,6 +142,17 @@ const Profile = () => {
                 onClick={() => history.push(`${currentPath}/edit`)}
               >
                 Edit User Profile
+              </Button>
+            </div>
+
+            //TODO: style button container for deletion (red?)
+            <div className="edit button-container">
+              <Button
+                className="edit button"
+                width="50%"
+                onClick={() => delProfile()}
+              >
+                Delete User Profile
               </Button>
             </div>
           </>
