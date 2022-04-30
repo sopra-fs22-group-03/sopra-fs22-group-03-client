@@ -116,7 +116,7 @@ const Registration = (props) => {
       localStorage.setItem("token", user.token);
 
       // Store the ID of the currently logged-in user in localstorage
-      localStorage.setItem("currentUser", user.id);
+      localStorage.setItem("currentUser", user.userId);
 
       // Registration successfully worked --> navigate to the route /game in the GameRouter
       history.push(`/game`);
@@ -138,7 +138,7 @@ const Registration = (props) => {
           className="registration loginbutton"
           onClick={() => goToLogin()}
         >
-          Login
+          Back to Login
         </Button>
         {/* <ReactLogo width="60px" height="60px"/> */}
       </div>
