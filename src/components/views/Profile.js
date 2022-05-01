@@ -145,7 +145,7 @@ const Profile = () => {
               </Button>
             </div>
 
-            //TODO: style button container for deletion (red?)
+            {/*TODO: style button container for deletion (red?)*/}
             <div className="edit button-container">
               <Button
                 className="edit button"
