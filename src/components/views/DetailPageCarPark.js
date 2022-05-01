@@ -19,7 +19,7 @@ const Booking = props => {
     const [checkoutDate, setCheckoutDate] = useState(null);
     const [checkoutTime, setCheckoutTime] = useState(null);
     const carparkId = props.parkingId;
-    const userId = 200001; // change this here to the actual user id
+    const userId = localStorage.getItem("currentUser"); // change this here to the actual user id
 
     const doBooking = async () => {
         try {
@@ -110,9 +110,9 @@ const DetailPageCarPark = () => {
     const [isTrue, setIsTrue] = useState(false);
     const {parkingId} = useParams();
     const[ParkingData, setParkingData] = useState([]);
-    const userId = 200001; //change this once clear
     const [btnString, setBtnString] = useState("check-in");
     const [btnColor, setBtnColor] = useState("#192342");
+    const userId = localStorage.getItem("currentUser");
 
     useEffect(() => {
         async function fetchData() {

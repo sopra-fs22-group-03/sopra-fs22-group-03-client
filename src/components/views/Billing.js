@@ -2,39 +2,56 @@ import React from "react";
 import NavbarComp from "components/ui/NavbarComp";
 import BaseContainer from "components/ui/BaseContainer";
 import {api, handleError} from 'helpers/api';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, setTimeout, clearTimeout} from 'react';
 import {Button} from 'components/ui/Button';
 import "styles/views/Billing.scss";
 
 
+
 const BillingUnit = props => {
 
-    const [billingData, setBillingData] = useState(null);
-    const [userData, setUserData] = useState(null);
-    const parkingId = 100001;
-
+    const [billingInfo, setBillingInfo] = useState({});
+    const [parkingData, setParkingData] = useState({});
+    const billingId = props.data.billingId;
+    console.log(billingId);
 
     useEffect(() => {
         async function fetchData() {
-            const responseOne = await api.get(``); //load all the needed data
-            const responseTwo = await api.get(``)
+
+            if(props.data.bookingType == "RESERVATION")
+            {
+                const response = await api.get(`/reservations/${props.data.bookingId}`);
+                setBillingInfo(response.data);
+
+                const responseOne = await api.get(`/carparks/${billingInfo.carparkId}`);
+                setParkingData(responseOne.data);
+            }
+            else
+            {
+                // const response = await api.get(`/parkingslip/${props.data.bookingId}`)
+                // setBillingInfo(response.data);
+
+                // const responseOne = await api.get(`/carparks/${billingInfo.carparkId}`);
+                // setParkingData(responseOne.data);
+            }
             
-            setBillingData(responseOne.data);
-            setUserData(responseTwo.data);
         }
         fetchData()
-    });
+    }, []);
 
     const split = async () => {
         
         
     }
+
     const pay = async () => {
         try {
             const requestBody = JSON.stringify({
-                //{props.data.billingId}
             });
-            const response = await api.post(`/billing/${props.data.billingId}`, requestBody); 
+            const response = await api.post(`/billings/${billingId}/pay`, requestBody); 
+
+            window.location.reload()
+
         } catch (error){
             alert(
                 `Fatal error: Something went wrong during Payment: \n${handleError(error)}`
@@ -56,13 +73,13 @@ const BillingUnit = props => {
                     
                     <div>
                         <div className="billingunit checkDate">
-                            1/1/2022
+                            {billingInfo.checkinDate}
                         </div>
                     </div>
                     
                     <div>
                         <div className = "billingunit checkTime">
-                            14:00
+                            {billingInfo.checkinTime}
                         </div>
                     </div>
                 </div>
@@ -75,41 +92,35 @@ const BillingUnit = props => {
                     </div>
                     <div>
                         <div className ="billingunit checkDate">
-                            2/1/2022
+                            {billingInfo.checkoutDate}
                         </div>
                     </div>
                     <div>
                         <div className = "billingunit checkTime">
-                            18.00
+                            {billingInfo.checkoutTime}
                         </div>
                     </div>
                 </div>
             </div>
             
-        
+            
             <div className = "billingunit middleRow">
                 <div className= "billingunit parkingName">
-                    Car park 1
+                    {parkingData.name}
                 </div>
                 <div className="billingunit number">
-                    ZH 108789
+                    {billingInfo.licensePlate}
                 </div>
-            </div>
+            </div> 
 
             <div className="billingunit rightRow">
                 <div className= "billingunit amountTitle">
                     Amount
                 </div>
                 <div className="billingunit amountValue">
-                    CHF 8.00
-                </div>
-                <div className="billingunit durationTitle">
-                    Duration
+                    CHF {billingInfo.parkingFee}
                 </div>
                 <div>
-                    <div className="billingunit durationValue">
-                        2:00h
-                    </div>
                 </div>
                 
             </div>
@@ -123,18 +134,27 @@ const BillingUnit = props => {
                         Payment Status
                     </div>
                     <div className="billingunit statusValue">
-                        Outstanding
+                        {props.data.paymentStatus}
                     </div>
                 </div>
                 <div className = "billingunit buttons">
-                    <Button
-                    onClick={() => split()}>
-                        Split
-                    </Button>
-                    <Button
-                    onClick={() => pay()}>
-                        Pay
-                    </Button>
+                    { 
+                        (props.data.paymentStatus!=='PAID') && 
+                        <Button
+                        onClick={
+                            () => split()}>
+                            Split
+                        </Button>
+                    }
+                    { 
+                        (props.data.paymentStatus!=='PAID') && 
+                        <Button
+                        onClick={
+                            () => pay()}>
+                            Pay
+                        </Button>
+                    }
+                    
                 </div>
             </div>
         </div>
@@ -146,30 +166,25 @@ const BillingUnit = props => {
 
 const Billing = () => {
 
-    localStorage.setItem("userId", 1); //delete when finished
-    const userId = localStorage.getItem("userId");
-    const [billingData, setBillingData] = useState(null);
-    
+    const userId = localStorage.getItem("currentUser");
+    const [billingData, setBillingData] = useState([]);
+    console.log(userId);
     useEffect(() => {
         async function fetchData() {
-            const response = await api.get(`/billing/${userId}`)
+            const response = await api.get(`/users/${userId}/billing`);
 
             
-            setBillingData(response);
+            setBillingData(response.data);
         }
         fetchData()
     }, []);
 
 
-    //const reses = [];
-    //for (let r of billingData) {
-    //    reses.push(<BillingUnit data={r} key={r.parkingId} user={userId}/>);
-    //}
-
-    //add after div:
-    //<div>
-    //  {reses}
-    //</div>
+    const reses = [];
+    for (let r of billingData) {
+        reses.push(<BillingUnit data={r} key={r.billingId} user={userId}/>);
+    }
+    
 
     return(
         <>
@@ -180,9 +195,11 @@ const Billing = () => {
                     Billing
                 </div>
             </div>
+            <div>
+                {reses}
+            </div>
             
-            <BillingUnit ></BillingUnit>
-            {/* <BillingUnit id={userId} data={billingData} /> this should be mapped over. the data prop should get exactly one billing from the billingData list*/}
+            
         </BaseContainer>
         
         </>

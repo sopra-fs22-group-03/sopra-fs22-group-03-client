@@ -213,15 +213,14 @@ const ReservationUnit = props => {
 };
 
 const Reservation = () => {
-    localStorage.setItem("userId", 200001); // delete when finished
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem("currentUser");
     const [reservationData, setReservationData] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
             const response = await api.get(`/users/${userId}/reservations`);
 
-            setReservationData(response.data); // TODO: re-add .data when real data is back
+            setReservationData(response.data);
         }
         fetchData()
     }, []);
