@@ -40,8 +40,19 @@ const BillingUnit = props => {
     }, []);
 
     const split = async () => {
-        
-        
+        try {
+            const requestBody = JSON.stringify({"username":window.prompt("Who do you want to split this bill with?")
+            });
+            // POST request to /billings/${billingId}/pay invokes the split bill request
+            const response = await api.post(`/billings/${billingId}/split`, requestBody); 
+
+            window.location.reload()
+
+        } catch (error){
+            alert(
+                `Fatal error: Something went wrong during Split: \n${handleError(error)}`
+              );
+        }
     }
 
     const pay = async () => {
