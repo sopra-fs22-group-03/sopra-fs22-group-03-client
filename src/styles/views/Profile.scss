@@ -50,6 +50,9 @@ td:first-child {
   &.button {
     color: white;
   }
+  &.delbutton {
+    color: red;
+  }
 }
 
 .back {
@@ -60,8 +63,7 @@ td:first-child {
   }
 }
 
-//TODO: SCSS change titles of classNames (minor)
-.carpark {
+.profile {
 
   /////////////////////////////////////////////////////////////////
   ////////////////////////////// Header ///////////////////////////
@@ -97,7 +99,7 @@ td:first-child {
   /////////////////////// general elements ////////////////////////
   /////////////////////////////////////////////////////////////////
 
-  &.adressAndHours{
+  &.titleAndELements{
       font-family: $fontDefault;
       margin-top: 5%;
       width: 100%;
@@ -148,41 +150,19 @@ td:first-child {
       padding: 2%;
       margin: 2%;
   }
-
   
   /////////////////////////////////////////////////////////////////
-  ///////////////////////////// adress ////////////////////////////
+  //////////////////////////// elements //////////////////////////////
   /////////////////////////////////////////////////////////////////
 
-  &.street{
-      width: 100%;
-      justify-content: left;
-      order: 1;
-  }
-
-  &.zip{
-      order: 2;
-      flex: 0 0 30.6%; // the margin of adressDetails takes 4*2% = 8%. Therefore:92/3 = 
-  }
-
-  &.city {
-      order: 3;
-      flex: 0 0 61.3%; // 2* 30.6 = 61.3%
-  }
-
-  
-  /////////////////////////////////////////////////////////////////
-  //////////////////////////// hours //////////////////////////////
-  /////////////////////////////////////////////////////////////////
-
-  &.weekTitle{
+  &.title{
       background: none !important;
       font-weight: bold;
       flex: 0 0 30.6%;
 
   }
 
-  &.week{
+  &.element{
       flex: 0 0 61.3%;
   }
 

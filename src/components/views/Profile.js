@@ -97,41 +97,38 @@ const Profile = () => {
                 <td>{isManager}</td>
               </tr>
             </table> */}
-            //TODO: SCSS change titles of classNames (minor)
-            <div className="carpark adressAndHours ">
+            <div className="profile titleAndELements ">
               {/*------------------- Personal Info --------------------- */}
-              <div className="carpark leftElement">
-                <div className="carpark elementTitle">Personal Details</div>
-                <div className="carpark Details">
-                  <div className="carpark weekTitle">Username</div>
-                  <div className="carpark week">{username}</div>
-                  <div className="carpark weekTitle">Manager/User</div>
-                  <div className="carpark week">
-                    {isManager ? "Carpark Manager" : "Carpark User"}
-                  </div>
-                  <div className="carpark weekTitle">Status</div>
-                  <div className="carpark week">
+              <div className="profile leftElement">
+                <div className="profile elementTitle">Personal Details</div>
+                <div className="profile Details">
+                  <div className="profile title">Username</div>
+                  <div className="profile element">{username}</div>
+                  <div className="profile title">Status</div>
+                  <div className="profile element">
                     {isLoggedIn ? "Online" : "Offline"}
                   </div>
-                  <div className="carpark weekTitle">Street & Number</div>
-                  <div className="carpark week">{street + " " + streetNo}</div>
-                  <div className="carpark weekTitle">PLZ & City</div>
-                  <div className="carpark week">{zipCode + " " + city}</div>
+                  <div className="profile title">Street & Number</div>
+                  <div className="profile element">
+                    {street + " " + streetNo}
+                  </div>
+                  <div className="profile title">PLZ & City</div>
+                  <div className="profile element">{zipCode + " " + city}</div>
                 </div>
               </div>
 
               {/*------------------- Car Info --------------------- */}
-              <div className="carpark rightElement">
-                <div className="carpark elementTitle">Other Details</div>
-                <div className="carpark Details">
-                  <div className="carpark weekTitle">License Plate</div>
-                  <div className="carpark week">{licensePlate}</div>
-                  <div className="carpark weekTitle">Phone Number</div>
-                  <div className="carpark week">{phoneNumber}</div>
-                  <div className="carpark weekTitle">Email</div>
-                  <div className="carpark week">{email}</div>
-                  <div className="carpark weekTitle">Credit Card Nr</div>
-                  <div className="carpark week">{creditCardNumber}</div>
+              <div className="profile rightElement">
+                <div className="profile elementTitle">Other Details</div>
+                <div className="profile Details">
+                  <div className="profile title">License Plate</div>
+                  <div className="profile element">{licensePlate}</div>
+                  <div className="profile title">Phone Number</div>
+                  <div className="profile element">{phoneNumber}</div>
+                  <div className="profile title">Email</div>
+                  <div className="profile element">{email}</div>
+                  <div className="profile title">Credit Card Nr</div>
+                  <div className="profile element">{creditCardNumber}</div>
                 </div>
               </div>
             </div>
@@ -145,12 +142,17 @@ const Profile = () => {
               </Button>
             </div>
 
-            {/*TODO: style button container for deletion (red?)*/}
             <div className="edit button-container">
               <Button
-                className="edit button"
+                className="edit delbutton"
                 width="50%"
-                onClick={() => delProfile()}
+                onClick={() => {
+                  if (
+                    window.confirm("Do you really want to delete this user?")
+                  ) {
+                    delProfile();
+                  }
+                }}
               >
                 Delete User Profile
               </Button>
