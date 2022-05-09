@@ -54,6 +54,7 @@ const Booking = props => {
                         <FormField 
                         innerLabel = "date at beginning"
                         value = {checkinDate}
+                        type = "date"
                         onChange={x => setCheckinDate(x)}>
                         </FormField>
                     </div>
@@ -61,6 +62,7 @@ const Booking = props => {
                         <FormField 
                         innerLabel = "time at beginning"
                         value = {checkinTime}
+                        type = "time"
                         onChange={x => setCheckinTime(x)}>
                         </FormField>
                     </div>
@@ -73,6 +75,7 @@ const Booking = props => {
                         <FormField 
                         innerLabel = "date at end"
                         value = {checkoutDate}
+                        type = "date"
                         onChange={x => setCheckoutDate(x)}>
                         </FormField>
                     </div>
@@ -80,6 +83,7 @@ const Booking = props => {
                         <FormField 
                         innerLabel = "time at end"
                         value = {checkoutTime}
+                        type = "time"
                         onChange={x => setCheckoutTime(x)}>
 
                         </FormField>
