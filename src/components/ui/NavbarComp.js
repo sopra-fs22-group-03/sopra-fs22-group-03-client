@@ -21,6 +21,7 @@ const NavbarComp = () => {
                     <Nav.Link href= "/billing"> Billing</Nav.Link>
                     <Nav.Link href="/reservations">Reservations</Nav.Link>
                     <Nav.Link href={"/profile/" + userId}>Profile</Nav.Link>
+                    <Nav.Link href={"/notifications/"}>Notifications</Nav.Link>
                     <Nav.Link href={"/logout/" + userId}>Logout</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>

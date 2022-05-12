@@ -12,6 +12,7 @@ import DetailPageCarPark from "components/views/DetailPageCarPark";
 import Reservation from "components/views/Reservation";
 import Billing from "components/views/Billing";
 import Logout from "components/views/Logout";
+import Notifications from "components/views/Notifications";
 
 /**
  * Main router of your application.
@@ -60,6 +61,11 @@ const AppRouter = () => {
         <Route exact path = "/billing" children={
           <GameGuard>
             <Billing />
+          </GameGuard>
+        }/>
+        <Route exact path = "/notifications" children={
+          <GameGuard>
+            <Notifications />
           </GameGuard>
         }/>
         <Route exact path="/profile/:userId" children={
