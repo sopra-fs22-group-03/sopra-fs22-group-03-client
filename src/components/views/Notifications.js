@@ -18,17 +18,17 @@ const NotificationUnit = props => {
     console.log(notificationId);
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchBase() {
             const response = await api.get(`/users/${requesterId}/billing`);
             setBaseInfo(response.data);
         }
-        fetchData()
+        fetchBase()
     }, []);
 
     useEffect(() => {
         async function fetchData() {
-            const response = await api.get(`/users/${requesterId}/billing`);
-            setBaseInfo(response.data);            
+            // const response = await api.get(`/users/${requesterId}/billing`);
+            // setBaseInfo(response.data);            
             
             const responseOne = await api.get(`/reservations/${baseInfo.bookingId}`);
             setBillingInfo(responseOne.data);
@@ -47,12 +47,11 @@ const NotificationUnit = props => {
         fetchData()
     }, []);
 
-    const split = async () => {
+    const accept = async () => {
         try {
-            const requestBody = JSON.stringify({"username":window.prompt("Who do you want to split this bill with?")
+            const requestBody = JSON.stringify({"requestIsAccepted":"true"
             });
-            // POST request to /billings/${billingId}/pay invokes the split bill request
-            const response = await api.post(`/billings/${billingId}/split`, requestBody); 
+            const response = await api.post(`/notifications/${notificationId}/response`, requestBody); 
 
             window.location.reload()
 
@@ -63,11 +62,11 @@ const NotificationUnit = props => {
         }
     }
 
-    const pay = async () => {
+    const decline = async () => {
         try {
-            const requestBody = JSON.stringify({
+            const requestBody = JSON.stringify({"requestIsAccepted":"false"
             });
-            const response = await api.post(`/billings/${billingId}/pay`, requestBody); 
+            const response = await api.post(`/notifications/${notificationId}/response`, requestBody); 
 
             window.location.reload()
 
@@ -162,7 +161,7 @@ const NotificationUnit = props => {
                         (props.data.paymentStatus!=='PAID') && 
                         <Button
                         onClick={
-                            () => split()}>
+                            () => accept()}>
                             Accept
                         </Button>
                     }
@@ -170,7 +169,7 @@ const NotificationUnit = props => {
                         (props.data.paymentStatus!=='PAID') && 
                         <Button
                         onClick={
-                            () => pay()}>
+                            () => decline()}>
                             Decline
                         </Button>
                     }
