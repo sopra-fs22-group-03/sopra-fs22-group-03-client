@@ -8,23 +8,21 @@ import {api, handleError} from 'helpers/api';
 import {useEffect, useRef, useState} from 'react';
 
 function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
+  if (JSON.stringify(value) !== "null" && JSON.stringify(value) !== "undefined") {
+    localStorage.setItem("prevNotification", JSON.stringify(value));
+  }
+  const prev = localStorage.getItem("prevNotification");
+  return prev;
 }
-//TODO: Fix bug prompt window, sound?
+
+//TODO: Fix bugs, sound?
 const NavbarComp = () => {
+    // Notification useEffect that checks if a new notification has arrived
+    // Prompts the user whether to answer the request right away
     const userId = localStorage.getItem("currentUser");
     const [notificationData, setNotificationData] = useState(null);
     const prevNotifications = usePrevious(notificationData);
     const history = useHistory();
-    // const [notificationId, setNotificationId] = useState(null);
-    // const [requesterId, setRequesterId] = useState(null);
-    // const [requestedId, setRequestedId] = useState(null);
-    // const [billingId, setBillingId] = useState(null);
-    // const [response, setResponse] = useState(null);
     console.log(userId);
     useEffect(() => {
       setInterval(() => {
@@ -33,25 +31,25 @@ const NavbarComp = () => {
             setNotificationData(response.data);            
         }
         fetchData();
-        // Get the returned notification and update a new object.
-        //   const notification = new Notification(response.data);
-        //   setNotificationId(notification.notificationId);
-        //   setRequesterId(notification.requesterId);
-        //   setRequestedId(notification.requestedId);
-        //   setBillingId(notification.billingId);
-        //   setResponse(notification.response);
       }, 2000);
     }, []);
-    if (JSON.stringify(prevNotifications) != JSON.stringify(notificationData)) {
-        if (JSON.stringify(notificationData) != "[]") {
-            if (window.location.pathname != "/notifications" && window.location.pathname != "/notifications/") {
+
+    if (localStorage.getItem("notificationPrompt") !== "true") {
+        if (JSON.stringify(notificationData) !== "[]" && JSON.stringify(notificationData) !== "null" && JSON.stringify(notificationData) !== "undefined") {
+            if (window.location.pathname !== "/notifications" && window.location.pathname !== "/notifications/") {
+                localStorage.setItem("notificationPrompt", "true");
                 if (window.confirm("You have a new message, do you want to answer it right away?")) {
                     history.push("/notifications");
                 }
             }
         }
     }
-    
+    // alert(JSON.stringify(prevNotifications) + " and " + JSON.stringify(notificationData));
+    if (JSON.stringify(notificationData) !== "undefined" && JSON.stringify(notificationData) !== "null") {
+        if (localStorage.getItem("prevNotification") !== JSON.stringify(notificationData)) {
+            localStorage.setItem("notificationPrompt", "false");
+        }
+    }
 
     return <div>
         <Navbar className="navbar fixed-top color navbar-dark" expand="lg">

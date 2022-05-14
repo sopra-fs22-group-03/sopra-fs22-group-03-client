@@ -21,6 +21,8 @@ const Logout = () => {
         // Logout successfully worked --> navigate to the route /login
         localStorage.removeItem("token");
         localStorage.removeItem("currentUser");
+        localStorage.removeItem("prevNotification");
+        localStorage.removeItem("notificationPrompt");
         history.push("/");
 
         // TODO: window reload should be unnecessary?!
