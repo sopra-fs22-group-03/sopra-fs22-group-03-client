@@ -28,7 +28,9 @@ const AppRouter = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Start/>
+        <LoginGuard>
+            <Start/>
+          </LoginGuard>
         </Route>
         <Route path="/game">
           <GameGuard>
