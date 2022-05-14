@@ -9,28 +9,20 @@ import "styles/views/Notifications.scss";
 
 
 const NotificationUnit = props => {
-    const [baseInfo, setBaseInfo] = useState({});
-    const [billingInfo, setBillingInfo] = useState({});
-    const [parkingData, setParkingData] = useState({});
+    const [baseInfo, setBaseInfo] = useState([]);
+    const [billingInfo, setBillingInfo] = useState([]);
+    const [parkingData, setParkingData] = useState([]);
     const notificationId = props.data.notificationId
     const requesterId = props.data.requesterId;
     const billingId = props.data.billingId;
-    console.log(notificationId);
+    console.log(notificationId);    
 
     useEffect(() => {
         async function fetchBase() {
             const response = await api.get(`/users/${requesterId}/billing`);
             setBaseInfo(response.data);
-        }
-        fetchBase()
-    }, []);
 
-    useEffect(() => {
-        async function fetchData() {
-            // const response = await api.get(`/users/${requesterId}/billing`);
-            // setBaseInfo(response.data);            
-            
-            const responseOne = await api.get(`/reservations/${baseInfo.bookingId}`);
+            const responseOne = await api.get(`/reservations/${response.data.bookingId}`);
             setBillingInfo(responseOne.data);
 
             const responseTwo = await api.get(`/carparks/${billingInfo.carparkId}`);
@@ -44,7 +36,7 @@ const NotificationUnit = props => {
 
             
         }
-        fetchData()
+        fetchBase()
     }, []);
 
     const accept = async () => {
