@@ -89,7 +89,11 @@ const NavbarComp = () => {
                     <Nav.Link href="/reservations">Reservations</Nav.Link>
                     <Nav.Link href={"/profile/" + userId}>Profile</Nav.Link>
                     <Nav.Link href={"/notifications/"}>Notifications</Nav.Link>
-                    <Nav.Link href={"/logout/" + userId}>Logout</Nav.Link>
+                    <div className="navbar logoutFrame">
+                        <div className="navbar logout">
+                            <Nav.Link href={"/logout/" + userId}>Logout</Nav.Link>
+                        </div>
+                    </div>
                 </Nav>
                 </Navbar.Collapse>
             </Container>

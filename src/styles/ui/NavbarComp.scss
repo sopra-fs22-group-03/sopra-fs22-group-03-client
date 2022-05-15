@@ -6,7 +6,20 @@
     }
 
     &.navbar-brand > .navbar-custom > .navbar-text {
-    color: rgba(255,255,255,.8);
+    color: rgba(255,255,255,0.8);
+    }
+
+    &.logoutFrame{
+        padding: 0px 0px 0px 0px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    &.logout{
+        padding: 0px 3% 0px 3%;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: darkred;
+        border-radius: 20px;
     }
 }
 
