@@ -10,7 +10,6 @@ const BillingUnit = (props) => {
   const [billingInfo, setBillingInfo] = useState({});
   const [parkingData, setParkingData] = useState({});
   const billingId = props.data.billingId;
-  console.log(billingId);
 
   useEffect(() => {
     async function fetchData() {
@@ -166,7 +165,7 @@ const BillingUnit = (props) => {
 const Billing = () => {
   const userId = localStorage.getItem("currentUser");
   const [billingData, setBillingData] = useState([]);
-  console.log(userId);
+
   useEffect(() => {
     async function fetchData() {
       const response = await api.get(`/users/${userId}/billing`);

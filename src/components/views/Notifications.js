@@ -15,7 +15,6 @@ const NotificationUnit = props => {
     const notificationId = props.data.notificationId
     const requesterId = props.data.requesterId;
     const billingId = props.data.billingId;
-    console.log(notificationId);    
 
     useEffect(() => {
         async function fetchBase() {
@@ -179,7 +178,7 @@ const Notifications = () => {
 
     const userId = localStorage.getItem("currentUser");
     const [notificationData, setNotificationData] = useState([]);
-    console.log(userId);
+
     useEffect(() => {
         async function fetchData() {
             const response = await api.get(`/users/${userId}/notifications`);
