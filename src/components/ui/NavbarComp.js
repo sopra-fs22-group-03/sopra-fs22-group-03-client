@@ -7,13 +7,29 @@ import { useHistory } from "react-router-dom";
 import {api, handleError} from 'helpers/api';
 import {useEffect, useRef, useState} from 'react';
 
+
+// Hook
 function usePrevious(value) {
-  if (JSON.stringify(value) !== "null" && JSON.stringify(value) !== "undefined") {
-    localStorage.setItem("prevNotification", JSON.stringify(value));
-  }
-  const prev = localStorage.getItem("prevNotification");
-  return prev;
+    // The ref object is a generic container whose current property is mutable ...
+    // ... and can hold any value, similar to an instance property on a class
+    const ref = useRef();
+  
+    // Store current value in ref
+    useEffect(() => {
+      ref.current = value;
+    }, [value]); // Only re-run if value changes
+  
+    // Return previous value (happens before update in useEffect above)
+    return ref.current;
 }
+
+// function usePrevious(value) {
+//   if (JSON.stringify(value) !== "null" && JSON.stringify(value) !== "undefined") {
+//     localStorage.setItem("prevNotification", JSON.stringify(value));
+//   }
+//   const prev = localStorage.getItem("prevNotification");
+//   return prev;
+// }
 
 //TODO: Fix bugs, sound?
 const NavbarComp = () => {
@@ -31,11 +47,17 @@ const NavbarComp = () => {
             setNotificationData(response.data);            
         }
         fetchData();
-      }, 2000);
+      }, 3000);
     }, []);
 
+    // set localStorage to previous notification
+    if (JSON.stringify(prevNotifications) !== "null" && JSON.stringify(prevNotifications) !== undefined) {
+        localStorage.setItem("prevNotification", JSON.stringify(prevNotifications));
+    }
+
+    // check if user should be prompted to answer new message that arrived
     if (localStorage.getItem("notificationPrompt") !== "true") {
-        if (JSON.stringify(notificationData) !== "[]" && JSON.stringify(notificationData) !== "null" && JSON.stringify(notificationData) !== "undefined") {
+        if (JSON.stringify(notificationData) !== "[]" && JSON.stringify(notificationData) !== "null" && JSON.stringify(notificationData) !== undefined) {
             if (window.location.pathname !== "/notifications" && window.location.pathname !== "/notifications/") {
                 localStorage.setItem("notificationPrompt", "true");
                 if (window.confirm("You have a new message, do you want to answer it right away?")) {
@@ -44,8 +66,9 @@ const NavbarComp = () => {
             }
         }
     }
-    // alert(JSON.stringify(prevNotifications) + " and " + JSON.stringify(notificationData));
-    if (JSON.stringify(notificationData) !== "undefined" && JSON.stringify(notificationData) !== "null") {
+
+    // if a new message has arrived, set notificationPrompt to false -> triggers prompt
+    if (JSON.stringify(notificationData) !== undefined && JSON.stringify(notificationData) !== "null") {
         if (localStorage.getItem("prevNotification") !== JSON.stringify(notificationData)) {
             localStorage.setItem("notificationPrompt", "false");
         }
