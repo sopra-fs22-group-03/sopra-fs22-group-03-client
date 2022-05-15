@@ -124,9 +124,27 @@ const BillingUnit = (props) => {
         <div className="billingunit thirdRow">
           <div className="billingunit status">
             <div className="billingunit statusTitle">Payment Status</div>
-            <div className="billingunit statusValue">
+            {props.data.paymentStatus === "PAID" &&
+            <div className="billingunit statusValue" style={{backgroundColor: "lightgreen", color:"green"}}>
               {props.data.paymentStatus}
             </div>
+            }
+            {props.data.paymentStatus === "SPLIT_REQUESTED" &&
+            <div className="billingunit statusValue" style={{backgroundColor: "lightorange", color:"orange"}}>
+              {props.data.paymentStatus}
+            </div>
+            }
+            {props.data.paymentStatus === "SPLIT_ACCEPTED" &&
+            <div className="billingunit statusValue" style={{backgroundColor: "lightviolet", color:"violet"}}>
+              {props.data.paymentStatus}
+            </div>
+            }
+            {props.data.paymentStatus === "OUTSTANDING" &&
+            <div className="billingunit statusValue" style={{backgroundColor: "lightred", color:"red"}}>
+              {props.data.paymentStatus}
+            </div>
+            }
+            
           </div>
           <div className="billingunit buttons">
             {props.data.paymentStatus !== "PAID" &&

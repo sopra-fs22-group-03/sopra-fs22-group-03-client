@@ -34,8 +34,7 @@
     &.rowOne{
         display: flex;
         width: 100%;
-        order: 1;
-        
+        order: 1;     
     }
 
     &.rowOne > div{
@@ -54,7 +53,6 @@
     }
 
     &.check{
-        width: 100px;
         font-weight: bold;
         padding-top: 10%;
     }
@@ -63,16 +61,14 @@
         width:120%;
         background-color: #6A6A6A;
         border-radius: 50px;
-        padding: 10%;
         margin-bottom: 10px;
     }
 
     &.checkTime{
         width:120%;
+        margin-top: 5px;
         background: rgba(204, 204, 204, 0.9);
-        border-radius: 50px;
-        padding: 10%;
-        margin-bottom: 10px;
+        border-radius: 20px;
     }
 
     &.middleRow{
