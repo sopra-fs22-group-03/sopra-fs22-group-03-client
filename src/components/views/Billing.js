@@ -20,10 +20,10 @@ const BillingUnit = (props) => {
         const responseOne = await api.get(`/carparks/${response.data.carparkId}`);
         setParkingData(responseOne.data);
       } else {
-        // const response = await api.get(`/parkingslip/${props.data.bookingId}`)
-        // setBillingInfo(response.data);
-        // const responseOne = await api.get(`/carparks/${billingInfo.carparkId}`);
-        // setParkingData(responseOne.data);
+        const response = await api.get(`/parkingslip/${props.data.bookingId}`)
+        setBillingInfo(response.data);
+        const responseOne = await api.get(`/carparks/${billingInfo.carparkId}`);
+        setParkingData(responseOne.data);
       }
     }
     fetchData();
@@ -108,8 +108,8 @@ const BillingUnit = (props) => {
         </div>
 
         <div className="billingunit middleRow">
-          <div className="billingunit parkingName">{parkingData.name}</div>
-          <div className="billingunit number">{billingInfo.licensePlate}</div>
+          <div className="billingunit parkingName"> {parkingData.name} </div>
+          <div className="billingunit number"> {billingInfo.licensePlate} </div>
         </div>
 
         <div className="billingunit rightRow">
