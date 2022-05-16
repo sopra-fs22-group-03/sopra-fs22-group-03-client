@@ -17,7 +17,7 @@ const BillingUnit = (props) => {
         const response = await api.get(`/reservations/${props.data.bookingId}`);
         setBillingInfo(response.data);
 
-        const responseOne = await api.get(`/carparks/${response.data.carparkId}`);
+        const responseOne = await api.get(`/carparks/${response.data.carparkId}/${props.user}`);
         setParkingData(responseOne.data);
       } else {
         const response = await api.get(`/parkingslip/${props.data.bookingId}`)

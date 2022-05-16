@@ -104,10 +104,11 @@ const ReservationUnit = props => {
 
     const [parkingData, setParkingData] = useState({});
     const [isTrue, setIsTrue] = useState(false);
+    const userId = localStorage.getItem("currentUser");
 
     useEffect(() => {
         async function fetchData() {
-            const response = await api.get(`/carparks/${props.data.carparkId}`); 
+            const response = await api.get(`/carparks/${props.data.carparkId}/${userId}`); 
             
             setParkingData(response.data);
         }
