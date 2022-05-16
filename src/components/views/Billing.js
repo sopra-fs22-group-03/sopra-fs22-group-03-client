@@ -17,13 +17,12 @@ const BillingUnit = (props) => {
         const response = await api.get(`/reservations/${props.data.bookingId}`);
         setBillingInfo(response.data);
 
-        const responseOne = await api.get(`/carparks/${response.data.carparkId}/${props.user}`);
+        const responseOne = await api.get(`/carparks/${response.data.carparkId}`);
         setParkingData(responseOne.data);
       } else {
-        const response = await api.get(`/parkingslips/${props.data.bookingId}`)
+        const response = await api.get(`/parkingslip/${props.data.bookingId}`)
         setBillingInfo(response.data);
-        
-        const responseOne = await api.get(`/carparks/${response.data.carparkId}/${props.user}`);
+        const responseOne = await api.get(`/carparks/${billingInfo.carparkId}`);
         setParkingData(responseOne.data);
       }
     }
@@ -110,14 +109,14 @@ const BillingUnit = (props) => {
 
         <div className="billingunit middleRow">
           <div className="billingunit parkingName"> {parkingData.name} </div>
-          <div className="billingunit number"> license: {billingInfo.licensePlate} </div>
+          <div className="billingunit number"> {billingInfo.licensePlate} </div>
         </div>
 
         <div className="billingunit rightRow">
-          <div className="billingunit amountTitle">Amount:</div>
-            <div className="billingunit amountValue">
-              CHF {billingInfo.parkingFee}
-            </div>
+          <div className="billingunit amountTitle">Amount</div>
+          <div className="billingunit amountValue">
+            CHF {billingInfo.parkingFee}
+          </div>
           <div></div>
         </div>
 
@@ -131,12 +130,12 @@ const BillingUnit = (props) => {
             }
             {props.data.paymentStatus === "SPLIT_REQUESTED" &&
             <div className="billingunit statusValue" style={{backgroundColor: "lightorange", color:"orange"}}>
-              SPLIT REQUESTED
+              {props.data.paymentStatus}
             </div>
             }
             {props.data.paymentStatus === "SPLIT_ACCEPTED" &&
             <div className="billingunit statusValue" style={{backgroundColor: "lightviolet", color:"violet"}}>
-              SPLIT ACCEPTED
+              {props.data.paymentStatus}
             </div>
             }
             {props.data.paymentStatus === "OUTSTANDING" &&

@@ -120,23 +120,11 @@ const DetailPageCarPark = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await api.get(`/carparks/${parkingId}/${userId}`);
+            const response = await api.get(`/carparks/${parkingId}`);
             setParkingData(response.data);
-
-            if (response.data.isCheckedIn === true){
-                setBtnColor("#FF2E79");
-                setBtnString("check-out");
-            }
-            else{
-                setBtnString("check-in");
-                setBtnColor("#192342");
-            }
         }
         fetchData()
     }, []);
-
-    
-
 
     const doCheckin = async () => {
                 
@@ -147,7 +135,7 @@ const DetailPageCarPark = () => {
             });
             const response = await api.post(`/carparks/${parkingId}/checkin`, requestBody);
             setBtnString("check-out");
-            setBtnColor("#FF2E79");
+            setBtnColor("#FF2E79")
 
         } catch (error) {
 
@@ -158,8 +146,8 @@ const DetailPageCarPark = () => {
                 });
                 const response = await api.post(`/carparks/${parkingId}/checkout`, requestBody);
 
-                setBtnString("check-in");
-                setBtnColor("#192342");
+                setBtnString("check-in")
+                setBtnColor("#192342")
                 
             
             } catch (error) {
