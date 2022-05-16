@@ -18,19 +18,13 @@ const NotificationUnit = props => {
 
     useEffect(() => {
         async function fetchBase() {
-          try {
-            const response = await api.get(`/billings/${billingId}`);
+            const response = await api.get(`/users/${requesterId}/billing`);
             setBaseInfo(response.data);
 
-            const responseOne = await api.get(
-              `/reservations/${response.data.bookingId}`
-            );
+            const responseOne = await api.get(`/reservations/${response.data.bookingId}`);
             setBillingInfo(responseOne.data);
-            
-            // TODO: Backend endpoint that fetches carpark info only
-            const responseTwo = await api.get(
-              `/carparks/${responseOne.data.carparkId}/${requesterId}`
-            );
+
+            const responseTwo = await api.get(`/carparks/${billingInfo.carparkId}`);
             setParkingData(responseTwo.data);
 
             // const response = await api.get(`/parkingslip/${props.data.bookingId}`)
@@ -38,17 +32,11 @@ const NotificationUnit = props => {
 
             // const responseOne = await api.get(`/carparks/${billingInfo.carparkId}`);
             // setParkingData(responseOne.data);
-          } catch (error) {
-            alert(
-              `Error: Something went wrong during Notification fetching \n${handleError(
-                error
-              )}`
-            );
-          }
+
+            
         }
         fetchBase()
     }, []);
-    console.log(billingId);
 
     const accept = async () => {
         try {
@@ -84,7 +72,7 @@ const NotificationUnit = props => {
         return(
         <>
         <div className = "billingunit container">
-            <h2>{props.data.requesterUsername} has just requested a 50/50 split!</h2>
+            <h2>User {props.data.requesterId} has just requested a 50/50 split!</h2>
             <div className= "billingunit firstRowLeft">
                 <div className = "billingunit rowOne">
                     <div>
