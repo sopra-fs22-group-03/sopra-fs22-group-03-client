@@ -20,7 +20,7 @@ const NotificationUnit = (props) => {
         const response = await api.get(`/billings/${billingId}`);
         setBaseInfo(response.data);
 
-        if (response.data.bookingType === "reservation") {
+        if (response.data.bookingType === "RESERVATION") {
           const responseOne = await api.get(
             `/reservations/${response.data.bookingId}`
           );
