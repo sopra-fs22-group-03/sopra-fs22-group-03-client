@@ -47,13 +47,18 @@ const NavbarComp = () => {
             setNotificationData(response.data);            
         }
         fetchData();
-      }, 3000);
+      }, 2000);
     }, []);
 
+    // initialization: first notification needs to be set for prompt not to appear twice
+    if (!localStorage.getItem("prevNotification") && JSON.stringify(notificationData) !== "null") {
+        localStorage.setItem("prevNotification", JSON.stringify(notificationData));
+    }
+    
     // set localStorage to previous notification
     if (JSON.stringify(prevNotifications) !== "null" && JSON.stringify(prevNotifications) !== undefined) {
         localStorage.setItem("prevNotification", JSON.stringify(prevNotifications));
-    }
+    }    
 
     // check if user should be prompted to answer new message that arrived
     if (localStorage.getItem("notificationPrompt") !== "true") {
@@ -69,7 +74,7 @@ const NavbarComp = () => {
 
     // if a new message has arrived, set notificationPrompt to false -> triggers prompt
     if (JSON.stringify(notificationData) !== undefined && JSON.stringify(notificationData) !== "null") {
-        if (localStorage.getItem("prevNotification") !== JSON.stringify(notificationData)) {
+        if (localStorage.getItem("prevNotification").length < JSON.stringify(notificationData).length) {
             localStorage.setItem("notificationPrompt", "false");
         }
     }

@@ -68,7 +68,7 @@ const NotificationUnit = (props) => {
         `/notifications/${notificationId}/response`,
         requestBody
       );
-
+      
       window.location.reload();
     } catch (error) {
       alert(
@@ -86,7 +86,7 @@ const NotificationUnit = (props) => {
         `/notifications/${notificationId}/response`,
         requestBody
       );
-
+      
       window.location.reload();
     } catch (error) {
       alert(
