@@ -78,7 +78,7 @@ const NavbarComp = () => {
           "You have a new message, do you want to answer it right away?"
         )
       ) {
-        history.push("/notifications");
+        history.push("/notifications/");
       }
     }
   }
