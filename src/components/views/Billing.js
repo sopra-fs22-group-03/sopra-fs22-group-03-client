@@ -252,12 +252,14 @@ const Billing = () => {
   const [billingData, setBillingData] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await api.get(`/users/${userId}/billing`);
-
-      setBillingData(response.data);
-    }
-    fetchData();
+    setInterval(() => {
+      async function fetchData() {
+        const response = await api.get(`/users/${userId}/billing`);
+  
+        setBillingData(response.data);
+      }
+      fetchData();
+    }, 100)
   }, []);
 
   const reses = [];
