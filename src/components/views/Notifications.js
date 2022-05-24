@@ -101,7 +101,7 @@ const NotificationUnit = (props) => {
     <>
       <div className="billingunit container">
         <h2>
-          {props.data.requesterUsername} has just requested a 50/50 split!
+          {props.data.requesterUsername}: {props.data.splitRequestMsg}
         </h2>
         <div className="billingunit firstRowLeft">
           <div className="billingunit rowOne">
