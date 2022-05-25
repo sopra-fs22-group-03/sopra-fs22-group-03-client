@@ -1,4 +1,4 @@
-# Project Title
+# myPark - A Parking Reservation System
 
 One Paragraph of project description goes here
 
@@ -84,7 +84,7 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
