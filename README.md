@@ -1,4 +1,4 @@
-# myPark - A Parking Reservation System
+# myPark - A Parking Reservation System (Client)
 
 One Paragraph of project description goes here
 
