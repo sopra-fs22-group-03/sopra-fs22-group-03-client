@@ -103,7 +103,7 @@ const DetailPageCarPark = () => {
   const { parkingId } = useParams();
   const [ParkingData, setParkingData] = useState([]);
   const [btnString, setBtnString] = useState("check-in");
-  const [btnColor, setBtnColor] = useState("#192342");
+  const [btnColor, setBtnColor] = useState("#385870");
   const userId = localStorage.getItem("currentUser");
 
   useEffect(() => {
@@ -113,11 +113,11 @@ const DetailPageCarPark = () => {
         setParkingData(response.data);
 
         if (response.data.isCheckedIn === true) {
-          setBtnColor("#FF2E79");
+          setBtnColor("#e796b6");
           setBtnString("check-out");
         } else {
           setBtnString("check-in");
-          setBtnColor("#192342");
+          setBtnColor("#385870");
         }
       }
       fetchData();
@@ -134,7 +134,7 @@ const DetailPageCarPark = () => {
         requestBody
       );
       setBtnString("check-out");
-      setBtnColor("#FF2E79");
+      setBtnColor("#e796b6");
     } catch (error) {
       try {
         const requestBody = JSON.stringify({
@@ -146,7 +146,7 @@ const DetailPageCarPark = () => {
         );
 
         setBtnString("check-in");
-        setBtnColor("#192342");
+        setBtnColor("#385870");
       } catch (error) {
         alert(
           `Fatal error, checkin doesn't work at the moment: \n${handleError(

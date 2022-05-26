@@ -235,7 +235,7 @@ const Registration = (props) => {
         </div> */}
         </div>
         <div className="registration sign-up">
-          <h1 className="header title">
+          <h1 className="registration title">
             Sign up today.
             <br />
             It's free!

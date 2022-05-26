@@ -188,7 +188,7 @@ const BillingUnit = (props) => {
         <div className="billingunit rightRow">
           <div className="billingunit amountTitle">Amount:</div>
           <div className="billingunit amountValue">
-            CHF {billingInfo.parkingFee}
+            CHF {Math.round(billingInfo.parkingFee * 100)/100}
           </div>
           <div></div>
         </div>

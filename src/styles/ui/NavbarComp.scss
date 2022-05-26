@@ -2,7 +2,7 @@
 
 .navbar {
     &.color {
-        background-color:#192342;
+        background-color:$accent;
     }
 
     &.navbar-brand > .navbar-custom > .navbar-text {
@@ -18,7 +18,7 @@
     &.logout{
         padding: 0px 3% 0px 3%;
         font-family: Arial, Helvetica, sans-serif;
-        background-color: darkred;
+        background-color: #e796b6;
         border-radius: 20px;
     }
 }

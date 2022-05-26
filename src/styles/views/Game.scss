@@ -49,6 +49,7 @@
     flex-direction: column;
     align-items: center;
     color: black;
+
   }
   &.user-list {
     width: 100%;
@@ -60,9 +61,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-  &.logout-button{
-    color: white;
   }
   & p,
   h2 {
@@ -78,7 +76,7 @@
     border-radius: $borderRadius;
     display: flex;
     align-items: center;
-    background: #567DF4;
+    background: $accentDark;
   }
   &.container > div{
     display: flex;

@@ -106,13 +106,13 @@ const Game = () => {
   }
 
   return (
-    <div>
+    <>
       <NavbarComp />
     <BaseContainer className="game container">
       <h2 className="game title">Carpark Overview</h2>
       {content}
     </BaseContainer>
-    </div>
+    </>
   );
 };
 

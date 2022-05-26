@@ -20,7 +20,7 @@
     padding-left: 37px;
     padding-right: 37px;
     border-radius: 0.75em;
-    background: transparentize(rgba(184, 82, 120, 0.9), 0.2);
+    background: $accentDark;
     transition: opacity 0.5s ease, transform 0.5s ease;
     box-shadow: $dropShadow;
   }
@@ -36,7 +36,7 @@
     border: none;
     border-radius: 0.75em;
     margin-bottom: 20px;
-    background: rgba(209, 92, 135, 0.9);
+    background: #e796b6;
     color: $textColor;
   }
   &.label {

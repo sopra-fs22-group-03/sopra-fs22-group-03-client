@@ -100,9 +100,9 @@ const NotificationUnit = (props) => {
   return (
     <>
       <div className="billingunit container">
-        <h2>
+        <div className="billingunit splitter">
           {props.data.requesterUsername}: {props.data.splitRequestMsg}
-        </h2>
+        </div>
         <div className="billingunit firstRowLeft">
           <div className="billingunit rowOne">
             <div>

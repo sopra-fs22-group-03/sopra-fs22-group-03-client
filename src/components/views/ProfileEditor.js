@@ -119,7 +119,7 @@ const ProfileEditor = (props) => {
     <div>
       <NavbarComp />
       <BaseContainer>
-      <h1 className="edit title">Edit profile of: {username}</h1>
+      <h1 className="edit title">Edit Profile</h1>
       <h4 className="edit note">NOTE: Only entered values will be updated</h4>
         <div className="edit container">
           <div className="edit form">

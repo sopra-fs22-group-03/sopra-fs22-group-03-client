@@ -10,7 +10,7 @@
   }
   &.form {
     color: "black";
-    background: transparentize(rgba(184, 82, 120, 0.9), 0.2);
+    background: $accentDark;
     border-radius: 10px;
     padding:15px;
     margin-top: 5%;
@@ -30,7 +30,7 @@
     border: none;
     border-radius: 0.75em;
     margin-bottom: 10px;
-    background: rgba(209, 92, 135, 0.9);
+    background: #e796b6;
     color: $textColor;
   }
   &.inputSmall {
@@ -41,7 +41,7 @@
     width: 90%;
     border-radius: 0.75em;
     margin-bottom: 10px;
-    background: rgba(209, 92, 135, 0.9);
+    background: #e796b6;
     color: $textColor;
   }
   &.inputMiddle {
@@ -52,7 +52,7 @@
     width: 98%;
     border-radius: 0.75em;
     margin-bottom: 10px;
-    background: rgba(209, 92, 135, 0.9);
+    background: #e796b6;
     color: $textColor;
   }
   &.label {
@@ -94,6 +94,13 @@
     margin-left: 2em;
     min-height: 300px;
   }
+
+  &.title{
+    color:$accent;
+    font-family: $fontDefault;
+    font-weight: bold;
+  }
+
   &.to-login {
     margin-top: 2em;
     align-self: right;

@@ -4,12 +4,13 @@
   &.container {
     min-height: flex;
     /* we include the left mixin defined in _theme.scss and save three duplicate lines :) */
-    @include center;
+    display: flex;
+    justify-content: center;
     flex-direction: row;
   }
   &.form {
     color: "black";
-    background: transparentize(rgba(184, 82, 120, 0.9), 0.2);
+    background: $accentDark;
     border-radius: 10px;
     padding:15px;
     margin-top: 5%;
@@ -25,13 +26,13 @@
   &.title{
     margin-top: 2em;
     display: flex;
-    @include center;
+    justify-content: center;
     font-weight: bold;
     color: $accent;
   }
   &.note{
     display: flex;
-    @include center;
+    justify-content: center;
     color: $accent;
   }
   &.input {
@@ -41,7 +42,7 @@
     border: none;
     border-radius: 0.75em;
     margin-bottom: 10px;
-    background: rgba(209, 92, 135, 0.9);
+    background: #e796b6;
     color: $textColor;
   }
   &.inputSmall {
@@ -52,7 +53,7 @@
     width: 90%;
     border-radius: 0.75em;
     margin-bottom: 10px;
-    background: rgba(209, 92, 135, 0.9);
+    background: #e796b6;
     color: $textColor;
   }
   &.inputMiddle {

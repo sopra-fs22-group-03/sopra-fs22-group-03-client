@@ -189,7 +189,7 @@ const ReservationUnit = props => {
                     {props.data.licensePlate}
                 </div>
                 <div className="unit amount">
-                    CHF {props.data.parkingFee}
+                    CHF {Math.round(props.data.parkingFee * 100)/100}
                 </div>
                 <div className = "unit buttons">
                     <Button

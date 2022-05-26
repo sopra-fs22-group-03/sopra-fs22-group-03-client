@@ -10,7 +10,7 @@
     &.header{
         margin-top: 10%;
         padding: 10px;
-        background: #567DF4;
+        background: $accent;
         border-radius: $borderRadius;
         font-family: $fontDefault;
         display: flex;
@@ -73,7 +73,8 @@
     }
 
     &.Details{
-        background: rgba(86, 125, 244, 0.5);
+        background: $accentDark;
+        opacity: 80%;
         border-radius: 25px;
         padding: 1%;
         display: flex;
@@ -82,7 +83,7 @@
     }
 
     &.Details > div{
-        background: #CCCCCC;
+        background: #e796b6;
         border-radius: 50px;
         padding: 2%;
         margin: 2%;
@@ -154,8 +155,6 @@
 
 .booking{
     &.container{
-        color: "black";
-        background: rgba(86, 125, 244, 0.75);
         border-radius: 10px;
         padding: 10px;
         margin-bottom: 5%;
@@ -202,7 +201,6 @@
 
     &.button > Button{
         color: white;
-        background: rgba(255, 46, 121, 0.9);
     }
 
 

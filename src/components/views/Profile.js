@@ -82,7 +82,7 @@ const Profile = () => {
       <BaseContainer>
         {userIdOfCurrentUser === userId ? (
           <>
-            <h1 className="edit title">Profile page of user: {username}</h1>
+            <h1 className="edit title">Profile page of {username}</h1>
             {/* <table>
               <tr>
                 <td>Username</td>
@@ -133,29 +133,34 @@ const Profile = () => {
               </div>
             </div>
             <div className="edit button-container">
-              <Button
-                className="edit button"
-                width="50%"
-                onClick={() => history.push(`${currentPath}/edit`)}
-              >
-                Edit User Profile
-              </Button>
-            </div>
+              <div className="edit inner-container">
+                <div className="edit button-edit">
+                  <Button
+                    className="edit button"
+                    width="50%"
+                    onClick={() => history.push(`${currentPath}/edit`)}
+                  >
+                    Edit User Profile
+                  </Button> 
+                </div>
 
-            <div className="edit button-container">
-              <Button
-                className="edit delbutton"
-                width="50%"
-                onClick={() => {
-                  if (
-                    window.confirm("Do you really want to delete this user?")
-                  ) {
-                    delProfile();
-                  }
-                }}
-              >
-                Delete User Profile
-              </Button>
+                <div className="edit button-delete">
+                  <Button
+                    className="edit delbutton"
+                    width="50%"
+                    onClick={() => {
+                      if (
+                        window.confirm("Do you really want to delete this user?")
+                      ) {
+                        delProfile();
+                      }
+                    }}
+                  >
+                    Delete User Profile
+                  </Button>
+                </div>
+              </div>
+              
             </div>
           </>
         ) : (
