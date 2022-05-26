@@ -83,6 +83,7 @@ const NavbarComp = () => {
             window.location.reload();
         }
       }
+      localStorage.setItem("prevNotification", JSON.stringify(notificationData));
     }
   }
 
