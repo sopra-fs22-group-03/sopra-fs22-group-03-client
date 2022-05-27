@@ -14,7 +14,7 @@ Next, there are two other technologies that you should look at:
 
 * [react-router-dom](https://reacttraining.com/react-router/web/guides/quick-start) offers declarative routing for React. It is a collection of navigational components that fit nicely with the application. 
 * [react-hooks](https://reactrouter.com/web/api/Hooks) let you access the router's state and perform navigation from inside your components.
-### Prerequisites
+### Launch & Deployment
 
 For your local development environment, you will need Node.js. You can download it [here](https://nodejs.org). All other dependencies, including React, get installed with:
 
@@ -28,53 +28,12 @@ Now you can open [http://localhost:3000](http://localhost:3000) to view it in th
 
 Notice that the page will reload if you make any edits. You will also see any lint errors in the console (use Google Chrome).
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+## Illustrations
+![Screenshot](screenshots/overview.png)
+![Screenshot](screenshots/carpark.png)
+![Screenshot](screenshots/map.png)
+![Screenshot](screenshots/billing.png)
+![Screenshot](screenshots/notifications.png)
 
 ## Roadmap
 - Establish a connection of this prototype to the city of Zurich / to the actual carparks
