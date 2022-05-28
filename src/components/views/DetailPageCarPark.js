@@ -125,21 +125,34 @@ const DetailPageCarPark = () => {
   }, []);
 
   const doCheckin = async () => {
-    try {
-      const requestBody = JSON.stringify({
-        userId,
-      });
-      const response = await api.post(
-        `/carparks/${parkingId}/checkin`,
-        requestBody
-      );
-      setBtnString("check-out");
-      setBtnColor("#e796b6");
-    } catch (error) {
-      try {
+
+    if(ParkingData.isCheckedIn === false) {
+      
+      try{
         const requestBody = JSON.stringify({
           userId,
         });
+        
+        const response = await api.post(
+          `/carparks/${parkingId}/checkin`,
+          requestBody
+        );
+        
+        setBtnString("check-out");
+        setBtnColor("#e796b6");
+      }
+      catch(error) {
+        alert(`Something went wrong during checkin: \n${handleError(error)}`);
+      }
+      
+    }
+    else if(ParkingData.isCheckedIn === true) {
+      
+      try{
+        const requestBody = JSON.stringify({
+          userId,
+        });
+        
         const response = await api.post(
           `/carparks/${parkingId}/checkout`,
           requestBody
@@ -147,14 +160,12 @@ const DetailPageCarPark = () => {
 
         setBtnString("check-in");
         setBtnColor("#385870");
-      } catch (error) {
-        alert(
-          `Fatal error, checkin doesn't work at the moment: \n${handleError(
-            error
-          )}`
-        );
+      }
+      catch(error) {
+        alert(`Something went wrong during check out: \n${handleError(error)}`);
       }
     }
+    
   };
 
   return (
@@ -218,14 +229,15 @@ const DetailPageCarPark = () => {
           </div>
         </div>
         <div className="carpark buttons">
-          <Button
-            onClick={() => doCheckin()}
-            className="carpark check-in"
-            style={{ backgroundColor: btnColor }}
-          >
-            {btnString}
-          </Button>
-
+          {ParkingData.numOfEmptySpaces !== 0 && (
+              <Button
+              onClick={() => doCheckin()}
+              className="carpark check-in"
+              style={{ backgroundColor: btnColor }}
+            >
+              {btnString}
+            </Button>
+          )}
           <Button
             onClick={() => setIsTrue(!isTrue)}
             className="carpark reservation"
