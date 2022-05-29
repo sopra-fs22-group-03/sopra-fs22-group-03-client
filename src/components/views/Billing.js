@@ -76,26 +76,32 @@ const BillingUnit = (props) => {
   const billingId = props.data.billingId;
 
   useEffect(() => {
-    async function fetchData() {
-      if (props.data.bookingType == "RESERVATION") {
-        const response = await api.get(`/reservations/${props.data.bookingId}`);
-        setBillingInfo(response.data);
+    setInterval(() => {
+      async function fetchData() {
+        if (props.data.bookingType == "RESERVATION") {
+          const response = await api.get(
+            `/reservations/${props.data.bookingId}`
+          );
+          setBillingInfo(response.data);
 
-        const responseOne = await api.get(
-          `/carparks/${response.data.carparkId}/${props.user}`
-        );
-        setParkingData(responseOne.data);
-      } else {
-        const response = await api.get(`/parkingslips/${props.data.bookingId}`);
-        setBillingInfo(response.data);
+          const responseOne = await api.get(
+            `/carparks/${response.data.carparkId}/${props.user}`
+          );
+          setParkingData(responseOne.data);
+        } else {
+          const response = await api.get(
+            `/parkingslips/${props.data.bookingId}`
+          );
+          setBillingInfo(response.data);
 
-        const responseOne = await api.get(
-          `/carparks/${response.data.carparkId}/${props.user}`
-        );
-        setParkingData(responseOne.data);
+          const responseOne = await api.get(
+            `/carparks/${response.data.carparkId}/${props.user}`
+          );
+          setParkingData(responseOne.data);
+        }
       }
-    }
-    fetchData();
+      fetchData();
+    }, 100);
   }, []);
 
   // const split = async () => {
@@ -188,7 +194,7 @@ const BillingUnit = (props) => {
         <div className="billingunit rightRow">
           <div className="billingunit amountTitle">Amount:</div>
           <div className="billingunit amountValue">
-            CHF {Math.round(billingInfo.parkingFee * 100)/100}
+            CHF {Math.round(billingInfo.parkingFee * 100) / 100}
           </div>
           <div></div>
         </div>
@@ -255,11 +261,11 @@ const Billing = () => {
     setInterval(() => {
       async function fetchData() {
         const response = await api.get(`/users/${userId}/billing`);
-  
+
         setBillingData(response.data);
       }
       fetchData();
-    }, 100)
+    }, 100);
   }, []);
 
   const reses = [];
