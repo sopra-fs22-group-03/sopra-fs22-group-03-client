@@ -14,11 +14,15 @@ The next day, right after waking up, you check your myPark account on your compu
 
 ## Technologies
 
-List of technologies used
+We used React for frontend development. Styling was done using scss. Communication with backend uses REST interface. As additional libraries we used React Bootstrap for the Navbar. 
 
 ## High-Level Components
 
-Project's 3-5 main components
+We identify the [Map](src/components/views/Map.js), the [Billing page](src/components/views/Billing.js) and the [Reservation page](src/components/views/Reservation.js) as the tree most important classes of the client.
+- the Map is the key component for the user to find a relevant parking space. Usually a user knows very well where he/she wants to go. With our map feature, one can quickly zoom into the map of Zurich, identify the location one wants to go to and select the nearest parking space nearby. And even more than that: With our Map, the user can click on the nearest parking space and get redirected to the detailed page of the parking lot, where one can find additional information regarding the parking. One can also directly check-in or reserve a parking spot in the future, which leads us to the next very important feature of the app:
+- The reservation page can be used to check, whether the reservation of the parking space has worked. If so, one can also identify possible mistakes in the specification of date or time, one made earlier during reservation. Further it is very simple to edit the reservation or to delete it, if it is no longer needed, offering the user a lot of flexibiltity. With an increasing number of reservations done in the past, it is very hard to keep track of all of them. But the reservation page has the users back: All the reservations are systematically listed below each other, giving the user a good overview of current reservations. Paying the reserved parking space in advance is also possible. For that simply navigate to the billing page:
+- The billing page can be used to pay for reserved parking spots, or for past usages of parking spaces. One can also choose to split the bill with a buddy, leading to flexibility among the users. Want to know how much you payed for parking spaces in Zurich until now? No problem, simply sum up all the amounts of the listed reservations and real-time check-ins. Tle tabular design of the listings makes it very easy for the users to track their past payments and the upcoming costs.
+
 
 ## Getting Started
 
