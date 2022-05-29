@@ -1,4 +1,4 @@
-# SoPra Group 03 FS22 - myPark (Client)
+# MyPark – A Parking Reservation System (SoPra Group 03 FS22)
 
 ## Introduction
 
