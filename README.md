@@ -2,8 +2,6 @@
 
 ## Introduction
 
-## Introduction
-
 To date, there is no uniform system for reservation and digital check-in in parking garages in Zurich.
 We have all been to Zurich before and were looking for a parking space. On the one hand, it was unknown
 where exactly the next parking garage was, and on the other hand, it was often already full when you
