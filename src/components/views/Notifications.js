@@ -147,7 +147,7 @@ const NotificationUnit = (props) => {
         <div className="billingunit rightRow">
           <div className="billingunit amountTitle">Amount</div>
           <div className="billingunit amountValue">
-            CHF {billingInfo.parkingFee / 2}
+            CHF {Math.round((billingInfo.parkingFee / 2) * 100)/100}
           </div>
           <div></div>
         </div>
